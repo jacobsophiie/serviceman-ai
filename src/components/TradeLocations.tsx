@@ -38,7 +38,7 @@ export function TradeLocations({ trade }: { trade: Trade }) {
           {majorLocations.map((location, index) => (
             <li key={location.slug}>
               <Link
-                href={`/quote?trade=${trade.slug}&location=${location.slug}`}
+                href={`/chat?trade=${trade.slug}&location=${location.slug}`}
                 className="group flex h-full items-center gap-3.5 rounded-2xl border border-line bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-blue/40 hover:shadow-soft"
               >
                 <span

@@ -27,7 +27,7 @@ export default function LocationsIndexPage() {
               Local trades, organised anywhere
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-              Wherever the job is, the process is the same: show or describe the
+              Wherever the job is, the process is the same: tell us about the
               problem, and we&rsquo;ll prepare your request for suitable trades
               businesses that service your area.
             </p>

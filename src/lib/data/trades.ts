@@ -7,7 +7,7 @@ export const trades: Trade[] = [
     singular: "plumber",
     category: "Plumbing",
     intro:
-      "Chat with our AI agent or open your camera to explain the plumbing problem. We'll collect the details and prepare your job request for suitable local plumbers.",
+      "Tell us about the plumbing problem and answer a few quick questions. We'll collect the details and prepare your job request for suitable local plumbers.",
     commonJobs: [
       "Leaking taps",
       "Blocked drains",
@@ -80,7 +80,7 @@ export const trades: Trade[] = [
     singular: "electrician",
     category: "Electrical",
     intro:
-      "Describe the electrical issue to our AI agent or show it with your camera from a safe distance. We'll gather the details and prepare your job request for suitable local electricians.",
+      "Describe the electrical issue and answer a few quick questions. We'll gather the details and prepare your job request for suitable local electricians.",
     commonJobs: [
       "Power points not working",
       "Light fittings and switches",
@@ -158,7 +158,7 @@ export const trades: Trade[] = [
     singular: "painter",
     category: "Painting",
     intro:
-      "Tell our AI agent what needs painting, or show the walls, ceilings or exterior with your camera. We'll prepare a clear job request for suitable local painters.",
+      "Tell us what needs painting — walls, ceilings or the exterior. We'll prepare a clear job request for suitable local painters.",
     commonJobs: [
       "Interior painting",
       "Exterior painting",
@@ -222,7 +222,7 @@ export const trades: Trade[] = [
     singular: "handyman",
     category: "Handyman work",
     intro:
-      "From small repairs to odd jobs, describe what needs doing or show it with your camera. We'll prepare your job request for suitable local handymen.",
+      "From small repairs to odd jobs, just tell us what needs doing. We'll prepare your job request for suitable local handymen.",
     commonJobs: [
       "Door repairs and adjustments",
       "Hanging pictures and mirrors",
@@ -355,7 +355,7 @@ export const trades: Trade[] = [
     singular: "carpenter",
     category: "Carpentry",
     intro:
-      "Describe the timber work you need or show it with your camera. We'll prepare a clear job request for suitable local carpenters.",
+      "Describe the timber work you need. We'll prepare a clear job request for suitable local carpenters.",
     commonJobs: [
       "Deck repairs and builds",
       "Door hanging and repairs",
@@ -578,7 +578,7 @@ export const trades: Trade[] = [
     singular: "concreter",
     category: "Concreting",
     intro:
-      "Describe the concreting work or show the area with your camera. We'll prepare your job request for suitable local concreters.",
+      "Describe the concreting work you need. We'll prepare your job request for suitable local concreters.",
     commonJobs: [
       "Driveways",
       "Paths and walkways",

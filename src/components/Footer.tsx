@@ -11,8 +11,8 @@ export function Footer() {
           <div>
             <Logo dark />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
-              Show us the job. We&rsquo;ll help you get it sorted — with a
-              clear job request sent to suitable local tradies.
+              Tell us what you need. We&rsquo;ll get it sorted — with a clear
+              job request sent to suitable local tradies.
             </p>
             <p className="mt-6 inline-block rounded-full border border-white/20 px-3 py-1 text-xs text-white/60">
               Demo prototype — no jobs are sent to real businesses

@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 /**
  * The entry point into the job flow: say what you need, then straight into
- * the quick quote form at /quote (location → job questions → contact).
+ * the chat assistant (location → job questions → contact).
  */
 
 const examplePrompts = [
@@ -51,7 +51,7 @@ export function JobStart({
     if (prompt) params.set("prompt", prompt);
     if (tradeSlug) params.set("trade", tradeSlug);
     if (locationSlug) params.set("location", locationSlug);
-    router.push(params.size > 0 ? `/quote?${params}` : "/quote");
+    router.push(params.size > 0 ? `/chat?${params}` : "/chat");
   }
 
   return (

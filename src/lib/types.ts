@@ -57,8 +57,6 @@ export interface LocationArea {
   usesThe?: boolean;
 }
 
-export type ContactMethod = "Phone call" | "SMS" | "Email";
-
 export interface JobBrief {
   title?: string;
   tradeSlug?: string;
@@ -67,13 +65,9 @@ export interface JobBrief {
   visibleIssue?: string;
   urgency?: string;
   propertyType?: string;
-  access?: string;
-  timing?: string;
   suburb?: string;
   photos: number;
   notes: string[];
   name?: string;
   mobile?: string;
-  contactMethod?: ContactMethod;
-  address?: string;
 }

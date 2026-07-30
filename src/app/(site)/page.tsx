@@ -14,10 +14,10 @@ import { FinalCTA } from "@/components/FinalCTA";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "serviceman.ai — Show us the job. We'll help you get it sorted.",
+    absolute: "serviceman.ai — Tell us what you need. We'll get it sorted.",
   },
   description:
-    "Open your camera or chat with our AI agent. We'll help identify what needs to be done, ask the right questions and send your job to suitable local tradies.",
+    "Tell us what needs doing and answer a few quick questions. We'll prepare your job and send it to suitable local tradies, who come back to you with quotes.",
 };
 
 const cameraObservations = [
@@ -35,13 +35,13 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-20">
           <div>
             <h1 className="max-w-xl font-display text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl lg:text-[3.4rem]">
-              Show us the job. We&rsquo;ll help you get it{" "}
+              Tell us what you need. We&rsquo;ll help you get it{" "}
               <span className="word-highlight">sorted.</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-              Open your camera or chat with our AI agent. We&rsquo;ll help
-              identify what needs to be done, ask the right questions and send
-              your job to suitable local tradies.
+              Let us know what needs doing and answer a few quick questions.
+              We&rsquo;ll prepare your job and send it to suitable local
+              tradies, who come back to you with quotes.
             </p>
 
             <div className="mt-8">
@@ -49,7 +49,7 @@ export default function HomePage() {
             </div>
 
             <div className="mt-10">
-              <TrustBar compact />
+              <TrustBar />
             </div>
           </div>
 
@@ -106,7 +106,7 @@ export default function HomePage() {
               Camera assistant
             </p>
             <h2 className="mt-2 font-display text-3xl font-bold text-navy sm:text-4xl">
-              Not sure what the problem is? Show us.
+              Prefer to show it? Use your camera.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
               You don&rsquo;t need to know what the issue is called or which

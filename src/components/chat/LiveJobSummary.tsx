@@ -38,7 +38,6 @@ export function LiveJobSummary({ brief }: { brief: JobBrief }) {
         />
         <Row label="Problem" value={brief.problem} />
         <Row label="Location" value={brief.suburb} />
-        <Row label="Timing" value={brief.timing} />
         <Row label="Urgency" value={brief.urgency} />
         <Row label="Property type" value={brief.propertyType} />
         <div className="flex flex-col gap-1.5 py-2.5">

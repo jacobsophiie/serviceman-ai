@@ -10,6 +10,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { detectTrade, getTrade } from "@/lib/data/trades";
+import { SearchingSteps } from "@/components/SearchingSteps";
 import { getLocation } from "@/lib/data/locations";
 import {
   genericQuestionSet,
@@ -50,7 +51,7 @@ export function QuoteWizard({
   const [contact, setContact] = useState({ name: "", phone: "" });
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const [stepIndex, setStepIndex] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
+  const [phase, setPhase] = useState<"form" | "searching" | "done">("form");
   const cardTop = useRef<HTMLDivElement>(null);
 
   const detectedSlug = useMemo(
@@ -154,14 +155,34 @@ export function QuoteWizard({
     return Object.keys(next).length === 0;
   }
 
+  const locationDisplay = location
+    .trim()
+    .replace(/\b[a-z]/g, (c) => c.toUpperCase());
+
+  /* ------------------------------------------- searching: "doing the work" */
+
+  if (phase === "searching") {
+    return (
+      <SearchingSteps
+        steps={[
+          "Reviewing your job details",
+          `Locating ${tradeName ?? "tradie"}s near ${locationDisplay}`,
+          "Checking availability",
+          "Sending your job request",
+        ]}
+        onFinished={() => setPhase("done")}
+      />
+    );
+  }
+
   /* ------------------------------------------------------------ submitted */
 
-  if (submitted) {
+  if (phase === "done") {
     const answeredQuestions = steps.flatMap((s) =>
       s.kind === "question" && answers[s.question.id] ? [s.question] : [],
     );
     return (
-      <div className="rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8">
+      <div className="rise-in rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8">
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-mint-tint text-success">
           <BadgeCheck className="h-7 w-7" aria-hidden />
         </span>
@@ -169,16 +190,14 @@ export function QuoteWizard({
           Thanks, {contact.name.trim().split(/\s+/)[0]}!
         </h2>
         <p className="mt-3 text-base leading-relaxed text-muted">
-          We&rsquo;re preparing your job request
-          {tradeName ? (
-            <>
-              {" "}
-              for local <strong className="font-semibold text-ink">{tradeName}s</strong>
-            </>
-          ) : null}{" "}
+          Your quote has been submitted with local{" "}
+          <strong className="font-semibold text-ink">
+            {tradeName ? `${tradeName}s` : "tradies"}
+          </strong>{" "}
           around{" "}
-          <strong className="font-semibold text-ink">{location.trim()}</strong>.
-          Suitable tradies will come back to you with quotes.
+          <strong className="font-semibold text-ink">{locationDisplay}</strong>.
+          We&rsquo;ll let you know a rough price and availability in the next
+          couple of hours.
         </p>
 
         <dl className="mt-6 space-y-3 rounded-2xl bg-cloud p-4 text-sm">
@@ -330,7 +349,7 @@ export function QuoteWizard({
               noValidate
               onSubmit={(event) => {
                 event.preventDefault();
-                if (validateContact()) setSubmitted(true);
+                if (validateContact()) setPhase("searching");
               }}
             >
               <h2 className="font-display text-xl font-bold text-navy sm:text-2xl">

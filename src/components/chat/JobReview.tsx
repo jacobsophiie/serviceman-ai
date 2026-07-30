@@ -11,8 +11,6 @@ type EditableField =
   | "visibleIssue"
   | "urgency"
   | "propertyType"
-  | "access"
-  | "timing"
   | "suburb"
   | "mobile";
 
@@ -28,8 +26,6 @@ const fields: FieldDef[] = [
   { field: "urgency", label: "Urgency" },
   { field: "suburb", label: "Location" },
   { field: "propertyType", label: "Property" },
-  { field: "timing", label: "Preferred timing" },
-  { field: "access", label: "Access" },
 ];
 
 function EditableRow({
@@ -217,14 +213,6 @@ export function JobReview({
             value={brief.mobile}
             onSave={(value) => onUpdate("mobile", value)}
           />
-          <div className="py-2.5">
-            <dt className="text-xs font-medium uppercase tracking-wide text-muted">
-              Preferred contact
-            </dt>
-            <dd className="mt-0.5 text-sm text-ink">
-              {brief.contactMethod ?? "Phone call"}
-            </dd>
-          </div>
         </div>
       </div>
 

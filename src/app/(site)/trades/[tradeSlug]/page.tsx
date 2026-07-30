@@ -29,7 +29,7 @@ export async function generateMetadata({
   const a = /^[aeiou]/i.test(trade.singular) ? "an" : "a";
   return {
     title: `Find ${a} ${trade.singular}`,
-    description: `Need ${a} ${trade.singular}? Show or describe the problem to the serviceman.ai job assistant and create a clear request for suitable local ${trade.name.toLowerCase()}.`,
+    description: `Need ${a} ${trade.singular}? Tell us what you need and answer a few quick questions — we'll create a clear request for suitable local ${trade.name.toLowerCase()}.`,
   };
 }
 
@@ -59,7 +59,7 @@ export default async function TradePage({
               {trade.category}
             </p>
             <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
-              Need {article} {trade.singular}? Show us what&rsquo;s happening.
+              Need {article} {trade.singular}? Tell us what needs doing.
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
               {trade.intro}
@@ -72,7 +72,7 @@ export default async function TradePage({
               />
             </div>
             <div className="mt-7">
-              <TrustBar compact tradesLabel={trade.name.toLowerCase()} />
+              <TrustBar tradesLabel={trade.name.toLowerCase()} />
             </div>
           </div>
           {/* Stretches to the height of the column beside it, so the hero reads
@@ -116,7 +116,7 @@ export default async function TradePage({
           {trade.commonJobs.map((job) => (
             <li key={job}>
               <Link
-                href={`/quote?trade=${trade.slug}&prompt=${encodeURIComponent(job)}`}
+                href={`/chat?trade=${trade.slug}&job=${encodeURIComponent(job)}`}
                 className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white px-5 py-4 text-[15px] font-medium text-ink transition-all hover:border-blue/40 hover:shadow-soft"
               >
                 {job}

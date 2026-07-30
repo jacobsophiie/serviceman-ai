@@ -1,6 +1,6 @@
 import { detectTrade, getTrade, trades } from "@/lib/data/trades";
 import { detectLocation, getLocation } from "@/lib/data/locations";
-import type { ContactMethod, JobBrief, Trade } from "@/lib/types";
+import type { JobBrief, Trade } from "@/lib/types";
 import type { LocationArea } from "@/lib/types";
 
 /*
@@ -18,14 +18,10 @@ export type Stage =
   | "photo"
   | "urgency"
   | "property"
-  | "timing"
-  | "access"
   | "suburb"
   | "suburb-confirm"
   | "full-name"
   | "mobile"
-  | "contact-method"
-  | "address"
   | "review";
 
 export interface SafetyNotice {
@@ -72,31 +68,23 @@ interface DetailQuestion {
 
 export const progressStages = [
   "Understanding the problem",
-  "Gathering job details",
   "Confirming location",
+  "Gathering job details",
   "Reviewing your request",
 ] as const;
 
 export function progressStepFor(stage: Stage): number {
-  if (stage === "clarify-trade" || stage === "problem" || stage === "details") {
+  if (stage === "clarify-trade" || stage === "problem") {
     return 0;
   }
-  if (
-    stage === "photo" ||
-    stage === "urgency" ||
-    stage === "property" ||
-    stage === "timing" ||
-    stage === "access"
-  ) {
+  if (stage === "suburb" || stage === "suburb-confirm") {
     return 1;
   }
   if (
-    stage === "suburb" ||
-    stage === "suburb-confirm" ||
-    stage === "full-name" ||
-    stage === "mobile" ||
-    stage === "contact-method" ||
-    stage === "address"
+    stage === "details" ||
+    stage === "photo" ||
+    stage === "urgency" ||
+    stage === "property"
   ) {
     return 2;
   }
@@ -578,29 +566,18 @@ function detailQuestionsFor(
 /* ------------------------------------------------------------ stage copy */
 
 const urgencyReplies = [
-  "It's urgent — today if possible",
-  "Within 24 hours",
-  "Within the next few days",
+  "It's urgent — today or tomorrow",
+  "Within the next week",
   "In the next few weeks",
-  "Just planning ahead",
+  "Just planning — I'm flexible",
 ];
 
-const propertyReplies = ["House", "Apartment or unit", "Townhouse", "Commercial property"];
-
-const timingReplies = [
-  "Weekday mornings",
-  "Weekday afternoons",
-  "Weekends",
-  "I'm flexible",
+const propertyReplies = [
+  "My home",
+  "A business or commercial property",
+  "A rental — I'm the tenant",
+  "A rental — I'm the owner or agent",
 ];
-
-const accessReplies = [
-  "Someone will be home",
-  "I can leave access instructions",
-  "Please call to arrange a time",
-];
-
-const contactMethodReplies: ContactMethod[] = ["Phone call", "SMS", "Email"];
 
 /* --------------------------------------------------------------- helpers */
 
@@ -634,10 +611,23 @@ function askSuburb(state: ConversationState): EngineResult {
     };
   }
   return {
-    messages: [{ text: "What suburb is the job located in?" }],
-    inputHint: "e.g. Surfers Paradise or 4217",
+    messages: [{ text: "Where is the job located?" }],
+    inputHint: "Suburb or postcode — e.g. Surfers Paradise or 4217",
     state: { ...state, stage: "suburb" },
   };
+}
+
+/** After the location is locked in, move on to the job questions. */
+function beginJobQuestions(
+  state: ConversationState,
+  lead: string,
+): EngineResult {
+  const result = nextDetailOrPhoto({
+    ...state,
+    stage: "details",
+    detailIndex: 0,
+  });
+  return { ...result, messages: [{ text: lead }, ...result.messages] };
 }
 
 function askPhoto(state: ConversationState, lead?: string): EngineResult {
@@ -712,54 +702,40 @@ export function startConversation(options: StartOptions = {}): EngineResult {
     messages.push({ text: safety.body, safety });
   }
 
+  // Location comes first, then the job questions follow from the trade.
   if (trade && options.presetJob) {
     state.brief.tradeSlug = trade.slug;
     state.brief.tradeName = trade.singular;
     state.brief.problem = options.presetJob;
     state.detailQuestions = detailQuestionsFor(trade, options.presetJob);
-    const first = state.detailQuestions[0];
     messages.push({
       text: `I can help you create a job request for ${options.presetJob.toLowerCase()}.`,
     });
-    if (first) {
-      messages.push({ text: first.question });
-      return {
-        messages,
-        quickReplies: first.quickReplies,
-        state: { ...state, stage: "details" },
-      };
-    }
-    return askPhoto({ ...state, stage: "photo" });
+    const next = askSuburb(state);
+    return { ...next, messages: [...messages, ...next.messages] };
   }
 
   if (trade) {
     state.brief.tradeSlug = trade.slug;
     state.brief.tradeName = trade.singular;
-    const openers: Record<string, string> = {
-      plumber: "What plumbing problem do you need fixed?",
-      electrician: "What electrical problem do you need help with?",
-      painter: "What painting work are you planning?",
-      handyman: "What do you need repaired, installed or assembled?",
-      gardener: "What does the garden need?",
-    };
-    const opener =
-      openers[trade.slug] ??
-      `What ${trade.category.toLowerCase()} work do you need help with?`;
+    if (options.initialMessage) {
+      state.brief.problem = options.initialMessage;
+    }
+    state.detailQuestions = detailQuestionsFor(
+      trade,
+      options.initialMessage ?? "",
+    );
 
     if (options.initialMessage && detected && !safety) {
       messages.push({
-        text: `It sounds like you may need ${/^[aeiou]/i.test(trade.singular) ? "an" : "a"} ${trade.singular}. I'll ask a few questions so we can give the tradie a clear description of the job.`,
+        text: `It sounds like you may need ${/^[aeiou]/i.test(trade.singular) ? "an" : "a"} ${trade.singular}. I'll ask a few quick questions so we can get you quotes.`,
       });
     } else if (!safety) {
       messages.push({ text: `I can help with that.` });
     }
-    messages.push({ text: opener });
 
-    return {
-      messages,
-      quickReplies: trade.commonJobs.slice(0, 5).concat("Something else"),
-      state,
-    };
+    const next = askSuburb(state);
+    return { ...next, messages: [...messages, ...next.messages] };
   }
 
   // No trade detected — clarify first. The customer never has to pick a
@@ -850,13 +826,12 @@ export function advance(
       const detailQuestions = trade ? detailQuestionsFor(trade, text) : [];
       const next: ConversationState = {
         ...state,
-        stage: "details",
         brief,
         location,
         detailQuestions,
         detailIndex: 0,
       };
-      return withPrefix(nextDetailOrPhoto(next));
+      return withPrefix(askSuburb(next));
     }
 
     case "details": {
@@ -918,26 +893,11 @@ export function advance(
     case "property": {
       const brief = { ...state.brief, propertyType: text };
       return withPrefix({
-        messages: [{ text: "When would you prefer the work to happen?" }],
-        quickReplies: timingReplies,
-        state: { ...state, brief, stage: "timing" },
-      });
-    }
-
-    case "timing": {
-      const brief = { ...state.brief, timing: text };
-      return withPrefix({
         messages: [
-          { text: "How should the tradie access the property on the day?" },
+          { text: "Thanks. Almost done — what's your full name?" },
         ],
-        quickReplies: accessReplies,
-        state: { ...state, brief, stage: "access" },
+        state: { ...state, brief, stage: "full-name" },
       });
-    }
-
-    case "access": {
-      const brief = { ...state.brief, access: text };
-      return withPrefix(askSuburb({ ...state, brief }));
     }
 
     case "suburb": {
@@ -959,14 +919,12 @@ export function advance(
         });
       }
       const brief = { ...state.brief, suburb: text };
-      return withPrefix({
-        messages: [
-          {
-            text: "Thanks. Almost done — what's your full name?",
-          },
-        ],
-        state: { ...state, brief, stage: "full-name" },
-      });
+      return withPrefix(
+        beginJobQuestions(
+          { ...state, brief },
+          "Thanks. Now a few quick questions about the job.",
+        ),
+      );
     }
 
     case "suburb-confirm": {
@@ -978,14 +936,16 @@ export function advance(
             ? `${loc.name}, ${loc.stateAbbr} ${loc.postcodeRange.split("–")[0]}`
             : state.pendingSuburbText ?? state.brief.suburb,
         };
-        return withPrefix({
-          messages: [{ text: "Great. Almost done — what's your full name?" }],
-          state: { ...state, brief, stage: "full-name" },
-        });
+        return withPrefix(
+          beginJobQuestions(
+            { ...state, brief },
+            "Great. Now a few quick questions about the job.",
+          ),
+        );
       }
       return withPrefix({
-        messages: [{ text: "No problem. What suburb is the job located in?" }],
-        inputHint: "e.g. Surfers Paradise or 4217",
+        messages: [{ text: "No problem. Where is the job located?" }],
+        inputHint: "Suburb or postcode — e.g. Surfers Paradise or 4217",
         state: { ...state, location: undefined, stage: "suburb" },
       });
     }
@@ -1016,47 +976,11 @@ export function advance(
           state,
         });
       }
-      const brief = { ...state.brief, mobile: text };
-      return withPrefix({
-        messages: [{ text: "How would you prefer tradies to contact you?" }],
-        quickReplies: [...contactMethodReplies],
-        state: { ...state, brief, stage: "contact-method" },
-      });
-    }
-
-    case "contact-method": {
-      const method = contactMethodReplies.find(
-        (m) => m.toLowerCase() === text.toLowerCase(),
-      );
       const brief = {
         ...state.brief,
-        contactMethod: method ?? "Phone call",
-      };
-      return withPrefix({
-        messages: [
-          {
-            text: "Lastly, what's the street address for the job? Your full address will only be used to help arrange the job — it will not appear publicly.",
-          },
-        ],
-        quickReplies: ["I'd rather share it later"],
-        inputHint: "e.g. 12 Example Street",
-        state: { ...state, brief, stage: "address" },
-      });
-    }
-
-    case "address": {
-      const skip = /rather|later|skip/i.test(text);
-      const brief = {
-        ...state.brief,
-        address: skip ? undefined : text,
+        mobile: text,
         title: titleFor(state.brief),
       };
-      if (skip) {
-        brief.notes = [
-          ...brief.notes,
-          "Customer will share the full street address once a tradie makes contact.",
-        ];
-      }
       return withPrefix({
         messages: [
           {
@@ -1094,7 +1018,7 @@ export function photoAdded(
           brief.photos > 1 ? "They'll help" : "It'll help"
         } tradies understand the job before they quote.`,
       },
-      { text: "How urgent is the job?" },
+      { text: "How soon do you need it done?" },
     ],
     quickReplies: urgencyReplies,
     state: { ...state, brief, stage: "urgency" },
@@ -1105,7 +1029,7 @@ export function skipPhoto(state: ConversationState): EngineResult {
   return {
     messages: [
       { text: "No worries — you can always add photos later if it helps." },
-      { text: "How urgent is the job?" },
+      { text: "How soon do you need it done?" },
     ],
     quickReplies: urgencyReplies,
     state: { ...state, stage: "urgency" },
@@ -1114,7 +1038,7 @@ export function skipPhoto(state: ConversationState): EngineResult {
 
 function askUrgency(state: ConversationState): EngineResult {
   return {
-    messages: [{ text: "How urgent is the job?" }],
+    messages: [{ text: "How soon do you need it done?" }],
     quickReplies: urgencyReplies,
     state: { ...state, stage: "urgency" },
   };
@@ -1122,7 +1046,7 @@ function askUrgency(state: ConversationState): EngineResult {
 
 function askProperty(state: ConversationState): EngineResult {
   return {
-    messages: [{ text: "What type of property is it?" }],
+    messages: [{ text: "Is this for a home or a business?" }],
     quickReplies: propertyReplies,
     state: { ...state, stage: "property" },
   };

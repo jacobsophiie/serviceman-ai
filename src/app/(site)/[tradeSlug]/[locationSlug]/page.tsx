@@ -28,7 +28,7 @@ export async function generateMetadata({
   const a = /^[aeiou]/i.test(trade.singular) ? "an" : "a";
   return {
     title: `Find ${a} ${singular} ${inPlace(location)}`,
-    description: `Need ${a} ${trade.singular} ${inPlace(location)}? Show or describe the problem to the serviceman.ai job assistant and create a clear request for suitable local ${trade.name.toLowerCase()}.`,
+    description: `Need ${a} ${trade.singular} ${inPlace(location)}? Tell us what you need and answer a few quick questions — we'll create a clear request for suitable local ${trade.name.toLowerCase()}.`,
   };
 }
 
@@ -95,7 +95,7 @@ export default async function TradeLocationPage({
               />
             </div>
             <div className="mt-7">
-              <TrustBar compact tradesLabel={trade.name.toLowerCase()} />
+              <TrustBar tradesLabel={trade.name.toLowerCase()} />
             </div>
           </div>
           {/* Stretches to the height of the column beside it, so the hero reads
@@ -136,7 +136,7 @@ export default async function TradeLocationPage({
           {trade.commonJobs.slice(0, 9).map((job) => (
             <li key={job}>
               <Link
-                href={`/quote?trade=${trade.slug}&location=${location.slug}&prompt=${encodeURIComponent(job)}`}
+                href={`/chat?trade=${trade.slug}&location=${location.slug}&job=${encodeURIComponent(job)}`}
                 className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white px-5 py-4 text-[15px] font-medium text-ink transition-all hover:border-blue/40 hover:shadow-soft"
               >
                 {job}

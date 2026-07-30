@@ -51,8 +51,8 @@ export function Testimonials() {
     <section className="bg-cloud">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="mb-10 max-w-2xl">
-          <p className="inline-flex items-center gap-1.5 rounded-full bg-sun-tint px-3 py-1 text-sm font-semibold text-sun-deep">
-            <Star className="h-3.5 w-3.5 fill-sun-deep" aria-hidden />
+          <p className="inline-flex items-center gap-1.5 rounded-full bg-blue-tint px-3 py-1 text-sm font-semibold text-blue">
+            <Star className="h-3.5 w-3.5 fill-sun text-sun" aria-hidden />
             Loved by homeowners
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold text-navy sm:text-4xl">

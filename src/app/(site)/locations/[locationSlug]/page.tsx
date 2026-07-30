@@ -68,7 +68,7 @@ export default async function LocationPage({
               />
             </div>
             <div className="mt-7">
-              <TrustBar compact />
+              <TrustBar />
             </div>
           </div>
           <div className="relative hidden min-h-[26rem] lg:block">

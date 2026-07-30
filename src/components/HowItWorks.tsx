@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Camera, FileText, Handshake } from "lucide-react";
+import { ArrowRight, MessageCircle, Sparkles, Handshake } from "lucide-react";
 
 /**
  * The three-step explainer, shown on the home page, /how-it-works and every
@@ -17,22 +17,22 @@ export function HowItWorks({
 }) {
   const steps = [
     {
-      icon: Camera,
+      icon: MessageCircle,
       tile: "bg-blue-tint text-blue",
-      title: "Show us or tell us",
-      copy: "Use your camera or describe the problem in your own words. You don't need to know what it's called or which trade you need.",
+      title: "Tell us what you need done",
+      copy: "Describe the job in your own words and answer a few quick questions. You don't need to know what it's called or which trade you need.",
     },
     {
-      icon: FileText,
+      icon: Sparkles,
       tile: "bg-sun-tint text-sun-deep",
-      title: `Get quotes from trusted ${tradesLabel}`,
-      copy: `We turn your description into a clear job request and send it to suitable local ${tradesLabel}, who come back to you with quotes.`,
+      title: `Let AI source trusted local ${tradesLabel}`,
+      copy: `Our AI turns your answers into a clear job request and sources suitable local ${tradesLabel} servicing your area.`,
     },
     {
       icon: Handshake,
       tile: "bg-mint-tint text-success",
-      title: "Choose the best tradie for the job",
-      copy: "Compare the quotes that come back, ask any questions you still have, and go ahead with the one that suits you.",
+      title: "Get multiple quotes, choose the best",
+      copy: "Compare the quotes that come back and go ahead with the one that suits you — stress-free, with no obligation to hire.",
     },
   ];
 

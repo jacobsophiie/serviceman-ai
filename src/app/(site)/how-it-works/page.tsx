@@ -93,8 +93,8 @@ export default function HowItWorksPage() {
               <span className="word-highlight">works</span>
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-              Show us or tell us what needs doing, get quotes back from
-              suitable local tradies, and pick the one that suits you.
+              Tell us what needs doing, get quotes back from suitable
+              local tradies, and pick the one that suits you.
             </p>
           </div>
           <div className="mt-12">

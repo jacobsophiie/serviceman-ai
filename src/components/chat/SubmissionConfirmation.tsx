@@ -5,13 +5,6 @@ import Link from "next/link";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import type { JobBrief } from "@/lib/types";
 
-const loadingStages = [
-  "Preparing your job",
-  "Checking the details",
-  "Finding suitable local trades businesses",
-  "Submitting your request",
-];
-
 export function SubmissionConfirmation({
   brief,
   reference,
@@ -21,6 +14,14 @@ export function SubmissionConfirmation({
   reference: string;
   onRestart: () => void;
 }) {
+  const tradesLabel = brief.tradeName ? `${brief.tradeName}s` : "tradies";
+  const suburbShort = brief.suburb?.split(",")[0]?.trim();
+  const loadingStages = [
+    "Reviewing your job details",
+    `Locating ${tradesLabel} near ${suburbShort ?? "you"}`,
+    "Checking availability",
+    "Sending your job request",
+  ];
   const [stage, setStage] = useState(0);
   const done = stage >= loadingStages.length;
 
@@ -29,10 +30,10 @@ export function SubmissionConfirmation({
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const id = setTimeout(
       () => setStage((s) => (reduced ? loadingStages.length : s + 1)),
-      reduced ? 0 : 900,
+      reduced ? 0 : 1000,
     );
     return () => clearTimeout(id);
-  }, [stage, done]);
+  }, [stage, done, loadingStages.length]);
 
   const tradeName = brief.tradeName
     ? brief.tradeName.charAt(0).toUpperCase() + brief.tradeName.slice(1)
@@ -89,12 +90,20 @@ export function SubmissionConfirmation({
           <CheckCircle2 className="h-8 w-8" aria-hidden />
         </span>
         <h1 className="mt-6 font-display text-3xl font-bold text-navy">
-          Your job request is ready
+          Thanks, {brief.name?.trim().split(/\s+/)[0] ?? "legend"}!
         </h1>
         <p className="mt-3 text-base leading-relaxed text-muted">
-          We&rsquo;ve collected the details local tradies need to understand
-          the job. In the live platform, your request would now be sent to
-          suitable businesses that service your area.
+          Your quote has been submitted with local{" "}
+          <strong className="font-semibold text-ink">{tradesLabel}</strong>
+          {suburbShort ? (
+            <>
+              {" "}
+              around{" "}
+              <strong className="font-semibold text-ink">{suburbShort}</strong>
+            </>
+          ) : null}
+          . We&rsquo;ll let you know a rough price and availability in the
+          next couple of hours.
         </p>
       </div>
 
@@ -105,7 +114,7 @@ export function SubmissionConfirmation({
           ["Location", brief.suburb ?? "To be confirmed"],
           ["Job reference", reference],
           ["Date submitted", submitted],
-          ["Preferred timeframe", brief.timing ?? brief.urgency ?? "Flexible"],
+          ["Preferred timeframe", brief.urgency ?? "Flexible"],
         ].map(([label, value]) => (
           <div
             key={label}

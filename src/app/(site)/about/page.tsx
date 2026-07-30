@@ -12,7 +12,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "serviceman.ai makes organising trade services simpler. Show or describe the problem to an AI agent and we'll prepare the request for suitable local trades businesses.",
+    "serviceman.ai makes organising trade services simpler. Tell an AI agent what you need and we'll prepare the request for suitable local trades businesses.",
 };
 
 const struggles = [
@@ -68,7 +68,7 @@ export default function AboutPage() {
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             serviceman.ai was created to make organising trade services
             simpler. Instead of searching through directories or trying to
-            work out who to call, customers can show or describe the problem
+            work out who to call, customers can simply describe the problem
             to an AI agent. The agent asks the right questions, gathers the
             important details and prepares the request for suitable local
             trades businesses.

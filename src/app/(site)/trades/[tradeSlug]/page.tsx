@@ -11,6 +11,7 @@ import { TrustBar } from "@/components/TrustBar";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { TradeAbout } from "@/components/TradeAbout";
 import { HowItWorks } from "@/components/HowItWorks";
+import { TradeLocations } from "@/components/TradeLocations";
 import { FinalCTA } from "@/components/FinalCTA";
 
 export function generateStaticParams() {
@@ -158,6 +159,9 @@ export default async function TradePage({
           </div>
         </section>
       )}
+
+      {/* Local areas */}
+      <TradeLocations trade={trade} />
 
       <FinalCTA
         heading={`Ready to sort your ${trade.category.toLowerCase()} job?`}

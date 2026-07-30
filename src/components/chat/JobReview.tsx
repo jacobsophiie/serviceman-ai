@@ -14,8 +14,7 @@ type EditableField =
   | "access"
   | "timing"
   | "suburb"
-  | "mobile"
-  | "email";
+  | "mobile";
 
 interface FieldDef {
   field: EditableField;
@@ -208,7 +207,7 @@ export function JobReview({
               Name
             </dt>
             <dd className="mt-0.5 text-sm text-ink">
-              {[brief.firstName, brief.lastName].filter(Boolean).join(" ") || (
+              {brief.name || (
                 <span className="italic text-muted/70">Not answered yet</span>
               )}
             </dd>
@@ -217,11 +216,6 @@ export function JobReview({
             label="Mobile"
             value={brief.mobile}
             onSave={(value) => onUpdate("mobile", value)}
-          />
-          <EditableRow
-            label="Email"
-            value={brief.email}
-            onSave={(value) => onUpdate("email", value)}
           />
           <div className="py-2.5">
             <dt className="text-xs font-medium uppercase tracking-wide text-muted">

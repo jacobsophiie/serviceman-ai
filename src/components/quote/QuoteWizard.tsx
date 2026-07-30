@@ -47,7 +47,7 @@ export function QuoteWizard({
   const [location, setLocation] = useState(
     () => (locationSlug && getLocation(locationSlug)?.name) || "",
   );
-  const [contact, setContact] = useState({ name: "", phone: "", email: "" });
+  const [contact, setContact] = useState({ name: "", phone: "" });
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const [stepIndex, setStepIndex] = useState(0);
   const [submitted, setSubmitted] = useState(false);
@@ -150,9 +150,6 @@ export function QuoteWizard({
     if (!contact.phone.trim()) next.phone = "Please enter a phone number.";
     else if (digits.length < 8 || digits.length > 12)
       next.phone = "Please enter a valid Australian phone number.";
-    if (!contact.email.trim()) next.email = "Please enter an email address.";
-    else if (!/^\S+@\S+\.\S+$/.test(contact.email.trim()))
-      next.email = "Please enter a valid email address.";
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -345,7 +342,7 @@ export function QuoteWizard({
               <div className="mt-5 grid gap-4">
                 <div>
                   <label htmlFor="quote-name" className="mb-1.5 block text-sm font-semibold text-navy">
-                    Your name
+                    Your full name
                   </label>
                   <input
                     id="quote-name"
@@ -378,24 +375,6 @@ export function QuoteWizard({
                   />
                   {errors.phone && (
                     <p className="mt-1.5 text-sm text-danger" role="alert">{errors.phone}</p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="quote-email" className="mb-1.5 block text-sm font-semibold text-navy">
-                    Email
-                  </label>
-                  <input
-                    id="quote-email"
-                    type="email"
-                    autoComplete="email"
-                    value={contact.email}
-                    onChange={(event) =>
-                      setContact((c) => ({ ...c, email: event.target.value }))
-                    }
-                    className={`${inputClass} ${errors.email ? "border-danger bg-danger/5" : ""}`}
-                  />
-                  {errors.email && (
-                    <p className="mt-1.5 text-sm text-danger" role="alert">{errors.email}</p>
                   )}
                 </div>
               </div>

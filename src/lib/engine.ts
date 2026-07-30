@@ -22,10 +22,8 @@ export type Stage =
   | "access"
   | "suburb"
   | "suburb-confirm"
-  | "first-name"
-  | "last-name"
+  | "full-name"
   | "mobile"
-  | "email"
   | "contact-method"
   | "address"
   | "review";
@@ -68,6 +66,8 @@ interface DetailQuestion {
   quickReplies?: string[];
   store: "problem" | "visibleIssue" | "note";
   followUpTip?: string;
+  /** After this answer, re-pick the question branch from the answer text. */
+  rebranch?: boolean;
 }
 
 export const progressStages = [
@@ -93,10 +93,8 @@ export function progressStepFor(stage: Stage): number {
   if (
     stage === "suburb" ||
     stage === "suburb-confirm" ||
-    stage === "first-name" ||
-    stage === "last-name" ||
+    stage === "full-name" ||
     stage === "mobile" ||
-    stage === "email" ||
     stage === "contact-method" ||
     stage === "address"
   ) {
@@ -169,7 +167,38 @@ export function checkSafety(text: string): SafetyNotice | undefined {
 
 /* ------------------------------------------------------- detail question */
 
-function detailQuestionsFor(trade: Trade, problemText: string): DetailQuestion[] {
+/** The "which of these" menu shown when free text doesn't match a branch. */
+function branchMenu(options: string[]): DetailQuestion[] {
+  return [
+    {
+      question: "Which of these best matches the job?",
+      quickReplies: [...options, "Something else"],
+      store: "problem",
+      rebranch: true,
+    },
+  ];
+}
+
+/** Open-ended fallback once the menu has also come back "Something else". */
+function openBranch(trade: Trade): DetailQuestion[] {
+  return [
+    {
+      question: `No worries — describe what's happening in your own words and I'll pass it straight to the ${trade.singular}.`,
+      store: "problem",
+    },
+    {
+      question: "Roughly how big is the job?",
+      quickReplies: ["A quick fix", "A standard job", "Something bigger"],
+      store: "note",
+    },
+  ];
+}
+
+function detailQuestionsFor(
+  trade: Trade,
+  problemText: string,
+  allowMenu = true,
+): DetailQuestion[] {
   const lower = problemText.toLowerCase();
 
   if (trade.slug === "plumber") {
@@ -272,30 +301,234 @@ function detailQuestionsFor(trade: Trade, problemText: string): DetailQuestion[]
         },
       ];
     }
+    if (/renovat|new plumb|new install|bathroom reno|kitchen reno/.test(lower)) {
+      return [
+        {
+          question: "What's being renovated or newly plumbed?",
+          quickReplies: ["Bathroom", "Kitchen", "Laundry", "Whole house", "Outdoors"],
+          store: "visibleIssue",
+        },
+        {
+          question: "Has the design or layout been decided?",
+          quickReplies: ["Yes, ready to go", "Still planning"],
+          store: "note",
+        },
+      ];
+    }
+    if (allowMenu) {
+      return branchMenu([
+        "A leaking tap or pipe",
+        "A blocked drain or toilet",
+        "Hot water system",
+        "A toilet problem",
+        "Renovation or new plumbing",
+      ]);
+    }
+    return openBranch(trade);
   }
 
   if (trade.slug === "electrician") {
-    return [
-      {
-        question:
-          "Is the problem affecting one area, or the whole property?",
-        quickReplies: [
-          "One switch or power point",
-          "One room",
-          "The whole property",
-          "I'm not sure",
-        ],
-        store: "visibleIssue",
-      },
-      {
-        question:
-          "Have you noticed any burning smells, buzzing or sparks?",
-        quickReplies: ["Yes", "No", "I'm not sure"],
-        store: "note",
-        followUpTip:
-          "Please don't touch the affected switch, power point or wiring. A licensed electrician will need to inspect it.",
-      },
-    ];
+    if (/switchboard|safety switch|fuse|trip/.test(lower)) {
+      return [
+        {
+          question: "What's happening with the switchboard?",
+          quickReplies: [
+            "Power keeps tripping",
+            "Upgrading an old board",
+            "Installing a safety switch",
+            "I'm not sure",
+          ],
+          store: "visibleIssue",
+        },
+        {
+          question: "Have you noticed any burning smells, buzzing or sparks?",
+          quickReplies: ["Yes", "No", "I'm not sure"],
+          store: "note",
+          followUpTip:
+            "Please don't touch the switchboard or wiring. A licensed electrician will need to inspect it.",
+        },
+      ];
+    }
+    if (/light|downlight|pendant|ceiling fan|lamp/.test(lower)) {
+      return [
+        {
+          question: "What type of lighting is it?",
+          quickReplies: [
+            "Downlights or pendants",
+            "Outdoor or garden lights",
+            "Ceiling fans",
+            "Security or sensor lights",
+          ],
+          store: "visibleIssue",
+        },
+        {
+          question: "How many lights or fittings are involved?",
+          quickReplies: ["Just one", "2 to 5", "6 or more"],
+          store: "note",
+        },
+        {
+          question: "Are these new installations, or replacing existing ones?",
+          quickReplies: ["New locations", "Replacing existing", "A mix of both"],
+          store: "note",
+        },
+      ];
+    }
+    if (/power point|powerpoint|socket|switches|new switch/.test(lower)) {
+      return [
+        {
+          question: "How many power points or switches need work?",
+          quickReplies: ["Just one", "2 to 5", "6 or more"],
+          store: "visibleIssue",
+        },
+        {
+          question: "New locations, or replacing existing ones?",
+          quickReplies: ["New locations", "Replacing existing", "A mix of both"],
+          store: "note",
+        },
+      ];
+    }
+    if (/appliance|oven|cooktop|charger|hook.?up|connect/.test(lower)) {
+      return [
+        {
+          question: "What are we connecting?",
+          quickReplies: [
+            "Oven or cooktop",
+            "Hot water system",
+            "EV charger",
+            "Something else",
+          ],
+          store: "visibleIssue",
+        },
+        {
+          question: "Is the wiring already in place for it?",
+          quickReplies: ["Yes", "No", "I'm not sure"],
+          store: "note",
+        },
+      ];
+    }
+    if (/rewir/.test(lower)) {
+      return [
+        {
+          question: "How much of the property needs rewiring?",
+          quickReplies: ["One room", "Several rooms", "The whole property"],
+          store: "visibleIssue",
+        },
+        {
+          question: "Roughly how old is the property?",
+          quickReplies: ["Under 20 years", "20 to 50 years", "Over 50 years", "Not sure"],
+          store: "note",
+        },
+      ];
+    }
+    if (/not work|isn.?t work|no power|stopped|outage|flicker|fault/.test(lower)) {
+      return [
+        {
+          question: "Is the problem affecting one area, or the whole property?",
+          quickReplies: [
+            "One switch or power point",
+            "One room",
+            "The whole property",
+            "I'm not sure",
+          ],
+          store: "visibleIssue",
+        },
+        {
+          question: "Have you noticed any burning smells, buzzing or sparks?",
+          quickReplies: ["Yes", "No", "I'm not sure"],
+          store: "note",
+          followUpTip:
+            "Please don't touch the affected switch, power point or wiring. A licensed electrician will need to inspect it.",
+        },
+      ];
+    }
+    if (allowMenu) {
+      return branchMenu([
+        "Lights or light fittings",
+        "Power points or switches",
+        "Switchboard or safety switch",
+        "Something isn't working",
+        "A new appliance hook-up",
+        "Rewiring",
+      ]);
+    }
+    return openBranch(trade);
+  }
+
+  if (trade.slug === "air-conditioning") {
+    if (/install|new system|new air|new unit|replace/.test(lower)) {
+      return [
+        {
+          question: "What type of system are you after?",
+          quickReplies: ["Split system", "Ducted", "Multi-head", "Not sure yet"],
+          store: "visibleIssue",
+        },
+        {
+          question: "How many rooms need cooling or heating?",
+          quickReplies: ["One room", "2 to 3 rooms", "The whole home"],
+          store: "note",
+        },
+      ];
+    }
+    if (/service|maintenance|clean/.test(lower)) {
+      return [
+        {
+          question: "How many units need servicing?",
+          quickReplies: ["One", "Two", "Three or more"],
+          store: "visibleIssue",
+        },
+        {
+          question: "When were they last serviced?",
+          quickReplies: ["Within the last year", "A few years ago", "Never", "Not sure"],
+          store: "note",
+        },
+      ];
+    }
+    if (/leak|drip|noise|rattle|smell/.test(lower)) {
+      return [
+        {
+          question: "What have you noticed?",
+          quickReplies: [
+            "Water dripping",
+            "A strange noise",
+            "A burning or musty smell",
+          ],
+          store: "visibleIssue",
+        },
+        {
+          question: "What type of system is it?",
+          quickReplies: ["Split system", "Ducted", "Not sure"],
+          store: "note",
+        },
+      ];
+    }
+    if (/not cool|not heat|isn.?t cool|isn.?t heat|warm air|blow|won.?t turn|not work/.test(lower)) {
+      return [
+        {
+          question: "What is the system doing?",
+          quickReplies: [
+            "Not cold enough",
+            "Not heating",
+            "Weak airflow",
+            "Won't turn on",
+          ],
+          store: "visibleIssue",
+        },
+        {
+          question: "What type of system is it?",
+          quickReplies: ["Split system", "Ducted", "Not sure"],
+          store: "note",
+        },
+      ];
+    }
+    if (allowMenu) {
+      return branchMenu([
+        "A new system installed",
+        "Not cooling or heating properly",
+        "Service or maintenance",
+        "A leak or strange noise",
+      ]);
+    }
+    return openBranch(trade);
   }
 
   if (trade.slug === "painter") {
@@ -386,7 +619,6 @@ function titleFor(brief: JobBrief): string {
 }
 
 const mobilePattern = /^(\+?61|0)?[\s-]?4[\s-]?(\d[\s-]?){8}$/;
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function askSuburb(state: ConversationState): EngineResult {
   if (state.location) {
@@ -516,7 +748,7 @@ export function startConversation(options: StartOptions = {}): EngineResult {
 
     if (options.initialMessage && detected && !safety) {
       messages.push({
-        text: `It sounds like you may need a ${trade.singular}. I'll ask a few questions so we can give the tradie a clear description of the job.`,
+        text: `It sounds like you may need ${/^[aeiou]/i.test(trade.singular) ? "an" : "a"} ${trade.singular}. I'll ask a few questions so we can give the tradie a clear description of the job.`,
       });
     } else if (!safety) {
       messages.push({ text: `I can help with that.` });
@@ -643,6 +875,23 @@ export function advance(
       if (q?.followUpTip && !/no|none|not/i.test(text)) {
         messages.push({ text: q.followUpTip });
       }
+      // A menu answer re-picks the question branch from the chosen option.
+      if (q?.rebranch) {
+        const trade = brief.tradeSlug ? getTrade(brief.tradeSlug) : undefined;
+        if (trade) {
+          const rebranched: ConversationState = {
+            ...state,
+            brief,
+            detailQuestions: detailQuestionsFor(trade, text, false),
+            detailIndex: 0,
+          };
+          const result = nextDetailOrPhoto(rebranched);
+          return withPrefix({
+            ...result,
+            messages: [...messages, ...result.messages],
+          });
+        }
+      }
       const next: ConversationState = {
         ...state,
         brief,
@@ -713,10 +962,10 @@ export function advance(
       return withPrefix({
         messages: [
           {
-            text: "Thanks. Almost done — what's your first name?",
+            text: "Thanks. Almost done — what's your full name?",
           },
         ],
-        state: { ...state, brief, stage: "first-name" },
+        state: { ...state, brief, stage: "full-name" },
       });
     }
 
@@ -730,8 +979,8 @@ export function advance(
             : state.pendingSuburbText ?? state.brief.suburb,
         };
         return withPrefix({
-          messages: [{ text: "Great. Almost done — what's your first name?" }],
-          state: { ...state, brief, stage: "first-name" },
+          messages: [{ text: "Great. Almost done — what's your full name?" }],
+          state: { ...state, brief, stage: "full-name" },
         });
       }
       return withPrefix({
@@ -741,20 +990,13 @@ export function advance(
       });
     }
 
-    case "first-name": {
-      const brief = { ...state.brief, firstName: text };
-      return withPrefix({
-        messages: [{ text: `Thanks ${text}. And your last name?` }],
-        state: { ...state, brief, stage: "last-name" },
-      });
-    }
-
-    case "last-name": {
-      const brief = { ...state.brief, lastName: text };
+    case "full-name": {
+      const brief = { ...state.brief, name: text };
+      const firstName = text.trim().split(/\s+/)[0];
       return withPrefix({
         messages: [
           {
-            text: "What is the best mobile number for tradies to contact you about this job?",
+            text: `Thanks ${firstName}. What is the best mobile number for tradies to contact you about this job?`,
           },
         ],
         inputHint: "e.g. 0400 000 000",
@@ -775,26 +1017,6 @@ export function advance(
         });
       }
       const brief = { ...state.brief, mobile: text };
-      return withPrefix({
-        messages: [{ text: "And your email address?" }],
-        inputHint: "e.g. you@example.com",
-        state: { ...state, brief, stage: "email" },
-      });
-    }
-
-    case "email": {
-      if (!emailPattern.test(text)) {
-        return withPrefix({
-          messages: [
-            {
-              text: "That email doesn't look quite right — could you double-check it?",
-            },
-          ],
-          inputHint: "e.g. you@example.com",
-          state,
-        });
-      }
-      const brief = { ...state.brief, email: text };
       return withPrefix({
         messages: [{ text: "How would you prefer tradies to contact you?" }],
         quickReplies: [...contactMethodReplies],

@@ -72,10 +72,8 @@ export interface JobBrief {
   suburb?: string;
   photos: number;
   notes: string[];
-  firstName?: string;
-  lastName?: string;
+  name?: string;
   mobile?: string;
-  email?: string;
   contactMethod?: ContactMethod;
   address?: string;
 }

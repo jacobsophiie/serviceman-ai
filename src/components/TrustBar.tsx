@@ -1,39 +1,42 @@
-import { BadgeCheck, Clock3, MapPin, ShieldCheck } from "lucide-react";
+import { BadgeCheck, Clock3, ShieldCheck } from "lucide-react";
 
 /**
  * Trust strip shown under heroes. Sticks to true product facts rather than
  * invented review counts — the warmth comes from the coloured tiles.
+ * `tradesLabel` makes the match point page-specific: "the best electricians"
+ * on the electrician page, "the best tradies" everywhere else.
  */
-const points = [
-  {
-    icon: BadgeCheck,
-    label: "Free to post a job",
-    tile: "bg-mint-tint text-success",
-  },
-  {
-    icon: Clock3,
-    label: "Takes about 2 minutes",
-    tile: "bg-sun-tint text-sun-deep",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Licensed, local businesses",
-    tile: "bg-blue-tint text-blue",
-  },
-  {
-    icon: MapPin,
-    label: "Matched to your suburb",
-    tile: "bg-coral-tint text-danger",
-  },
-];
+export function TrustBar({
+  compact = false,
+  tradesLabel = "tradies",
+}: {
+  compact?: boolean;
+  tradesLabel?: string;
+}) {
+  const points = [
+    {
+      icon: BadgeCheck,
+      label: "Free to post a job",
+      tile: "bg-mint-tint text-success",
+    },
+    {
+      icon: Clock3,
+      label: "Takes 2 minutes",
+      tile: "bg-sun-tint text-sun-deep",
+    },
+    {
+      icon: ShieldCheck,
+      label: `Matched with the best ${tradesLabel}`,
+      tile: "bg-blue-tint text-blue",
+    },
+  ];
 
-export function TrustBar({ compact = false }: { compact?: boolean }) {
   return (
     <ul
       className={
         compact
           ? "flex flex-wrap gap-x-6 gap-y-2.5"
-          : "grid grid-cols-2 gap-3 sm:grid-cols-4"
+          : "grid gap-3 sm:grid-cols-3"
       }
     >
       {points.map((point) => (

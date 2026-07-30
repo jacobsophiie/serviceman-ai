@@ -72,7 +72,7 @@ export default async function TradePage({
               />
             </div>
             <div className="mt-7">
-              <TrustBar compact />
+              <TrustBar compact tradesLabel={trade.name.toLowerCase()} />
             </div>
           </div>
           {/* Stretches to the height of the column beside it, so the hero reads

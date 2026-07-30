@@ -8,6 +8,7 @@ import { getTrade } from "@/lib/data/trades";
 import { heroImage } from "@/lib/images";
 import { JobStart } from "@/components/JobStart";
 import { TrustBar } from "@/components/TrustBar";
+import { Testimonials } from "@/components/Testimonials";
 import { HowItWorks } from "@/components/HowItWorks";
 import { FinalCTA } from "@/components/FinalCTA";
 
@@ -139,6 +140,9 @@ export default async function LocationPage({
           ))}
         </ul>
       </section>
+
+      {/* Reviews (generic — no single trade on a location page) */}
+      <Testimonials />
 
       {/* Nearby areas */}
       {location.nearbySuburbs.length > 0 && (

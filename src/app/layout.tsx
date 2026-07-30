@@ -15,7 +15,7 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "serviceman.ai — Show us the job. We'll help you get it sorted.",
+    default: "serviceman.ai — Tell us what you need. We'll get it sorted.",
     template: "%s | serviceman.ai",
   },
   description:

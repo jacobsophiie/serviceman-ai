@@ -10,6 +10,7 @@ import { JobStart } from "@/components/JobStart";
 import { TrustBar } from "@/components/TrustBar";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { TradeAbout } from "@/components/TradeAbout";
+import { Testimonials } from "@/components/Testimonials";
 import { HowItWorks } from "@/components/HowItWorks";
 import { TradeLocations } from "@/components/TradeLocations";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -132,6 +133,9 @@ export default async function TradePage({
 
       {/* What the trade does */}
       <TradeAbout trade={trade} />
+
+      {/* Reviews relevant to this trade */}
+      <Testimonials tradeSlug={trade.slug} />
 
       {/* FAQs */}
       <section className="border-t border-line bg-white">

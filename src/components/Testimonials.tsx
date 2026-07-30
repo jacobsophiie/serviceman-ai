@@ -1,35 +1,16 @@
 import { Star } from "lucide-react";
+import { reviewsFor } from "@/lib/data/reviews";
 
 /**
  * Review wall in the style of the big trades marketplaces — star rows, a
  * conversational quote, a name and suburb, and a trade tag. Content is
  * illustrative for the prototype (the footer carries the demo notice).
+ * Pass `tradeSlug` on trade pages so the reviews match the page.
  */
-const reviews = [
-  {
-    quote:
-      "I had no idea if I needed a plumber or a handyman. I just showed the camera the wet cupboard and it worked out the rest — three plumbers called the next morning.",
-    name: "Olivia N.",
-    where: "Surfers Paradise, QLD",
-    tag: "Plumbing",
-    tile: "bg-blue-tint text-blue",
-  },
-  {
-    quote:
-      "Posting the job took about two minutes on my phone. The questions it asked were the exact things the electrician said he needed to know before quoting.",
-    name: "Marcus T.",
-    where: "Brunswick, VIC",
-    tag: "Electrical",
-    tile: "bg-sun-tint text-sun-deep",
-  },
-  {
-    quote:
-      "So much easier than ringing around. I described the overgrown yard once, and the quotes that came back actually matched what I asked for.",
-    name: "Priya S.",
-    where: "Chermside, QLD",
-    tag: "Gardening",
-    tile: "bg-mint-tint text-success",
-  },
+const tagTiles = [
+  "bg-blue-tint text-blue",
+  "bg-sun-tint text-sun-deep",
+  "bg-mint-tint text-success",
 ];
 
 function Stars() {
@@ -46,7 +27,12 @@ function Stars() {
   );
 }
 
-export function Testimonials() {
+export function Testimonials({ tradeSlug }: { tradeSlug?: string }) {
+  const reviews = reviewsFor(tradeSlug).map((review, index) => ({
+    ...review,
+    tile: tagTiles[index % tagTiles.length],
+  }));
+
   return (
     <section className="bg-cloud">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">

@@ -34,24 +34,24 @@ export function TradeLocations({ trade }: { trade: Trade }) {
           </p>
         </div>
 
-        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {majorLocations.map((location, index) => (
             <li key={location.slug}>
               <Link
                 href={`/quote?trade=${trade.slug}&location=${location.slug}`}
-                className="group flex h-full items-center gap-3 rounded-2xl border border-line bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-blue/40 hover:shadow-soft"
+                className="group flex h-full items-center gap-3.5 rounded-2xl border border-line bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-blue/40 hover:shadow-soft"
               >
                 <span
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${tints[index % tints.length]}`}
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${tints[index % tints.length]}`}
                 >
                   <MapPin className="h-5 w-5" aria-hidden />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate font-display text-[15px] font-semibold text-navy">
+                  <span className="block font-display text-[15px] font-semibold leading-snug text-navy">
                     {trade.name} in {location.name}
                   </span>
                   <span className="block text-xs text-muted">
-                    {location.stateAbbr}
+                    {location.name}, {location.stateAbbr}
                   </span>
                 </span>
                 <ArrowRight

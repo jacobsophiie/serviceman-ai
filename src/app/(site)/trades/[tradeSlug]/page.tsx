@@ -100,6 +100,9 @@ export default async function TradePage({
         </div>
       </section>
 
+      {/* Local areas */}
+      <TradeLocations trade={trade} />
+
       {/* Common jobs */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <h2 className="font-display text-3xl font-bold text-navy">
@@ -159,9 +162,6 @@ export default async function TradePage({
           </div>
         </section>
       )}
-
-      {/* Local areas */}
-      <TradeLocations trade={trade} />
 
       <FinalCTA
         heading={`Ready to sort your ${trade.category.toLowerCase()} job?`}

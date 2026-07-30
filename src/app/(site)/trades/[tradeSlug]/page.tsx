@@ -68,7 +68,6 @@ export default async function TradePage({
                 heading={`Tell us what you need ${article} ${trade.singular} for`}
                 defaultValue={`I need ${article} ${trade.singular}`}
                 tradeSlug={trade.slug}
-                cameraCopy={`Show the AI agent the ${trade.category.toLowerCase()} problem and talk it through.`}
               />
             </div>
             <div className="mt-7">
@@ -113,7 +112,7 @@ export default async function TradePage({
           {trade.commonJobs.map((job) => (
             <li key={job}>
               <Link
-                href={`/chat?trade=${trade.slug}&job=${encodeURIComponent(job)}`}
+                href={`/quote?trade=${trade.slug}&prompt=${encodeURIComponent(job)}`}
                 className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white px-5 py-4 text-[15px] font-medium text-ink transition-all hover:border-blue/40 hover:shadow-soft"
               >
                 {job}

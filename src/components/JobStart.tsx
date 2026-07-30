@@ -1,17 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Camera, MessageCircle, Pencil } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 
 /**
- * The single entry point into the job flow, in two steps:
- *
- *   1. Say what you need  →  "Get free quotes"
- *   2. Choose how to explain it  →  camera or chat
- *
- * Splitting it keeps one decision on screen at a time; presenting camera and
- * chat side by side up front made the page read as two competing CTAs.
+ * The entry point into the job flow: say what you need, then straight into
+ * the quick quote form at /quote (location → job questions → contact).
  */
 
 const examplePrompts = [
@@ -30,18 +25,15 @@ export function JobStart({
   defaultValue = "",
   tradeSlug,
   locationSlug,
-  cameraCopy = "Point your camera at the problem and talk it through with our AI agent.",
 }: {
   heading?: string;
   defaultValue?: string;
   tradeSlug?: string;
   locationSlug?: string;
-  cameraCopy?: string;
 }) {
-  const [step, setStep] = useState<"describe" | "choose">("describe");
+  const router = useRouter();
   const [value, setValue] = useState(defaultValue);
   const [exampleIndex, setExampleIndex] = useState(0);
-  const chooseHeading = useRef<HTMLHeadingElement>(null);
   const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -53,115 +45,14 @@ export function JobStart({
     return () => clearInterval(id);
   }, []);
 
-  const prompt = value.trim();
-
-  function buildHref(base: string, withContext: boolean) {
+  function start() {
     const params = new URLSearchParams();
+    const prompt = value.trim();
     if (prompt) params.set("prompt", prompt);
-    if (withContext && tradeSlug) params.set("trade", tradeSlug);
-    if (withContext && locationSlug) params.set("location", locationSlug);
-    return params.size > 0 ? `${base}?${params}` : base;
+    if (tradeSlug) params.set("trade", tradeSlug);
+    if (locationSlug) params.set("location", locationSlug);
+    router.push(params.size > 0 ? `/quote?${params}` : "/quote");
   }
-
-  /* ------------------------------------------------ step 2: pick a channel */
-
-  if (step === "choose") {
-    const options = [
-      {
-        href: buildHref("/camera", false),
-        icon: Camera,
-        title: "Show us with your camera",
-        copy: cameraCopy,
-        primary: true,
-      },
-      {
-        href: buildHref("/chat", true),
-        icon: MessageCircle,
-        title: "Tell us what needs to be done",
-        copy: "Answer a few questions from our AI agent in a chat.",
-        primary: false,
-      },
-    ];
-
-    return (
-      <div className="w-full max-w-2xl">
-        <p className="text-sm font-semibold uppercase tracking-wide text-blue">
-          Step 2 of 2
-        </p>
-
-        <div className="mt-3 rounded-3xl border border-line bg-white p-5 shadow-soft">
-          <h2
-            ref={chooseHeading}
-            tabIndex={-1}
-            className="font-display text-lg font-bold text-navy focus:outline-none"
-          >
-            How would you like to explain it?
-          </h2>
-
-          {prompt && (
-            <div className="mt-3 flex items-start gap-2 rounded-2xl bg-cloud px-4 py-3">
-              <p className="min-w-0 flex-1 text-sm leading-relaxed text-ink">
-                &ldquo;{prompt}&rdquo;
-              </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setStep("describe");
-                  window.setTimeout(() => input.current?.focus(), 0);
-                }}
-                className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-blue hover:underline"
-              >
-                <Pencil className="h-3.5 w-3.5" aria-hidden />
-                Edit
-              </button>
-            </div>
-          )}
-
-          <div className="mt-4 flex flex-col gap-3">
-            {options.map((option) => (
-              <Link
-                key={option.title}
-                href={option.href}
-                className="group flex items-center gap-4 rounded-2xl border border-line p-4 transition-all hover:-translate-y-0.5 hover:border-blue/40 hover:shadow-soft"
-              >
-                <span
-                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-colors ${
-                    option.primary
-                      ? "bg-navy text-white group-hover:bg-blue"
-                      : "bg-cloud text-blue"
-                  }`}
-                >
-                  <option.icon className="h-6 w-6" aria-hidden />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block font-display text-base font-bold text-navy">
-                    {option.title}
-                  </span>
-                  <span className="mt-0.5 block text-sm leading-relaxed text-muted">
-                    {option.copy}
-                  </span>
-                </span>
-                <ArrowRight
-                  className="hidden h-5 w-5 shrink-0 text-muted transition-all group-hover:translate-x-0.5 group-hover:text-blue sm:block"
-                  aria-hidden
-                />
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setStep("describe")}
-          className="mt-3 px-1 text-sm font-medium text-muted hover:text-ink"
-        >
-          ← Back
-        </button>
-      </div>
-    );
-  }
-
-  /* --------------------------------------------- step 1: say what you need */
 
   return (
     <div className="w-full max-w-2xl">
@@ -170,8 +61,7 @@ export function JobStart({
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            setStep("choose");
-            window.setTimeout(() => chooseHeading.current?.focus(), 0);
+            start();
           }}
           className="mt-3 flex flex-col gap-2.5 sm:flex-row"
         >

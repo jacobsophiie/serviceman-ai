@@ -92,7 +92,6 @@ export default async function TradeLocationPage({
                 defaultValue={prompt}
                 tradeSlug={trade.slug}
                 locationSlug={location.slug}
-                cameraCopy={`Show the AI agent the ${trade.category.toLowerCase()} problem and talk it through.`}
               />
             </div>
             <div className="mt-7">
@@ -137,7 +136,7 @@ export default async function TradeLocationPage({
           {trade.commonJobs.slice(0, 9).map((job) => (
             <li key={job}>
               <Link
-                href={`/chat?trade=${trade.slug}&location=${location.slug}&job=${encodeURIComponent(job)}`}
+                href={`/quote?trade=${trade.slug}&location=${location.slug}&prompt=${encodeURIComponent(job)}`}
                 className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white px-5 py-4 text-[15px] font-medium text-ink transition-all hover:border-blue/40 hover:shadow-soft"
               >
                 {job}

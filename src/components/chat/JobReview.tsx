@@ -12,7 +12,8 @@ type EditableField =
   | "urgency"
   | "propertyType"
   | "suburb"
-  | "mobile";
+  | "mobile"
+  | "email";
 
 interface FieldDef {
   field: EditableField;
@@ -208,11 +209,27 @@ export function JobReview({
               )}
             </dd>
           </div>
-          <EditableRow
-            label="Mobile"
-            value={brief.mobile}
-            onSave={(value) => onUpdate("mobile", value)}
-          />
+          <div className="border-b border-line py-2.5">
+            <dt className="text-xs font-medium uppercase tracking-wide text-muted">
+              Preferred contact
+            </dt>
+            <dd className="mt-0.5 text-sm text-ink">
+              {brief.contactMethod ?? "Phone call"}
+            </dd>
+          </div>
+          {brief.contactMethod === "Email" ? (
+            <EditableRow
+              label="Email"
+              value={brief.email}
+              onSave={(value) => onUpdate("email", value)}
+            />
+          ) : (
+            <EditableRow
+              label="Mobile"
+              value={brief.mobile}
+              onSave={(value) => onUpdate("mobile", value)}
+            />
+          )}
         </div>
       </div>
 

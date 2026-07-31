@@ -21,7 +21,9 @@ export type Stage =
   | "suburb"
   | "suburb-confirm"
   | "full-name"
+  | "contact-method"
   | "mobile"
+  | "email"
   | "review";
 
 export interface SafetyNotice {
@@ -596,6 +598,7 @@ function titleFor(brief: JobBrief): string {
 }
 
 const mobilePattern = /^(\+?61|0)?[\s-]?4[\s-]?(\d[\s-]?){8}$/;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function askSuburb(state: ConversationState): EngineResult {
   if (state.location) {
@@ -956,11 +959,66 @@ export function advance(
       return withPrefix({
         messages: [
           {
-            text: `Thanks ${firstName}. What is the best mobile number for tradies to contact you about this job?`,
+            text: `Thanks ${firstName}. How would you like to be contacted about quotes?`,
+          },
+        ],
+        quickReplies: ["Phone call", "SMS", "Email"],
+        state: { ...state, brief, stage: "contact-method" },
+      });
+    }
+
+    case "contact-method": {
+      const wantsEmail = /email/i.test(text);
+      const brief = {
+        ...state.brief,
+        contactMethod: wantsEmail
+          ? "Email"
+          : /sms|text/i.test(text)
+            ? "SMS"
+            : "Phone call",
+      };
+      if (wantsEmail) {
+        return withPrefix({
+          messages: [{ text: "What's the best email address for your quotes?" }],
+          inputHint: "e.g. you@example.com",
+          state: { ...state, brief, stage: "email" },
+        });
+      }
+      return withPrefix({
+        messages: [
+          {
+            text: `What's the best mobile number for tradies to ${brief.contactMethod === "SMS" ? "text" : "call"} you on?`,
           },
         ],
         inputHint: "e.g. 0400 000 000",
         state: { ...state, brief, stage: "mobile" },
+      });
+    }
+
+    case "email": {
+      if (!emailPattern.test(text)) {
+        return withPrefix({
+          messages: [
+            {
+              text: "That email doesn't look quite right — could you double-check it?",
+            },
+          ],
+          inputHint: "e.g. you@example.com",
+          state,
+        });
+      }
+      const brief = {
+        ...state.brief,
+        email: text,
+        title: titleFor(state.brief),
+      };
+      return withPrefix({
+        messages: [
+          {
+            text: "That's everything I need. Here's the job we'll send to local tradies — take a look and edit anything that isn't right.",
+          },
+        ],
+        state: { ...state, brief, stage: "review" },
       });
     }
 

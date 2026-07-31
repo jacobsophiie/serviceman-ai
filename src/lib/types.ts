@@ -69,5 +69,7 @@ export interface JobBrief {
   photos: number;
   notes: string[];
   name?: string;
+  contactMethod?: string;
   mobile?: string;
+  email?: string;
 }

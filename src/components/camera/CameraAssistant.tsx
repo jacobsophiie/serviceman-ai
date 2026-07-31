@@ -194,6 +194,9 @@ export function CameraAssistant({
   }, []);
 
   useEffect(() => {
+    // Reset on every effect run — hot reload and StrictMode fire
+    // cleanup+setup pairs, and a stuck true flag kills the camera silently.
+    cancelledRef.current = false;
     return () => {
       cancelledRef.current = true;
       stopStream();

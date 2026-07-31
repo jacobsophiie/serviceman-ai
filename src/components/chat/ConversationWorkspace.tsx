@@ -94,7 +94,10 @@ export function ConversationWorkspace(props: StartOptions) {
       for (const message of result.messages) {
         setTyping(true);
         await sleep(reduced ? 60 : 450 + Math.min(message.text.length * 6, 650));
-        if (cancelledRef.current) return;
+        if (cancelledRef.current) {
+          setTyping(false);
+          return;
+        }
         setTyping(false);
         pushMessage({ role: "ai", text: message.text, safety: message.safety });
       }
@@ -106,9 +109,12 @@ export function ConversationWorkspace(props: StartOptions) {
 
   // Kick off the conversation once (guards against StrictMode double-run).
   useEffect(() => {
+    // Always un-cancel on effect (re-)run. Cleanup+setup pairs fire on hot
+    // reload and StrictMode remounts — resetting only on the first run left
+    // the flag stuck true, silently killing every message afterwards.
+    cancelledRef.current = false;
     if (startedRef.current) return;
     startedRef.current = true;
-    cancelledRef.current = false;
     if (props.initialMessage) {
       pushMessage({ role: "user", text: props.initialMessage });
     }

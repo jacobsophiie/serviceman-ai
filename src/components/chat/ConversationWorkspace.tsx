@@ -25,6 +25,7 @@ import {
   type StartOptions,
 } from "@/lib/engine";
 import { Logo } from "@/components/Logo";
+import { CameraCaptureModal } from "@/components/chat/CameraCaptureModal";
 import { SafetyAlert } from "@/components/chat/SafetyAlert";
 import { JobProgress } from "@/components/chat/JobProgress";
 import { LiveJobSummary } from "@/components/chat/LiveJobSummary";
@@ -36,6 +37,8 @@ interface DisplayMessage {
   role: "ai" | "user";
   text: string;
   safety?: SafetyNotice;
+  /** Attached photo previews (object/data URLs). */
+  photos?: string[];
 }
 
 function sleep(ms: number) {
@@ -65,6 +68,8 @@ export function ConversationWorkspace(props: StartOptions) {
   const [exitConfirm, setExitConfirm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState("");
+  const [cameraOpen, setCameraOpen] = useState(false);
+  const [photoUrls, setPhotoUrls] = useState<string[]>([]);
 
   const idRef = useRef(0);
   const startedRef = useRef(false);
@@ -73,6 +78,7 @@ export function ConversationWorkspace(props: StartOptions) {
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const captureRef = useRef<HTMLInputElement>(null);
 
   const pushMessage = useCallback(
     (message: Omit<DisplayMessage, "id">) => {
@@ -163,10 +169,12 @@ export function ConversationWorkspace(props: StartOptions) {
   );
 
   const handlePhotos = useCallback(
-    (count: number, label: string) => {
+    (label: string, photos: string[]) => {
       const state = stateRef.current;
-      if (!state) return;
-      pushMessage({ role: "user", text: label });
+      if (!state || photos.length === 0) return;
+      const count = photos.length;
+      setPhotoUrls((prev) => [...prev, ...photos]);
+      pushMessage({ role: "user", text: label, photos });
       if (state.stage === "photo") {
         void deliver(photoAdded(state, count));
         return;
@@ -196,21 +204,41 @@ export function ConversationWorkspace(props: StartOptions) {
       return;
     }
     if (action.action === "open-camera") {
-      handlePhotos(1, "Captured a photo with the camera");
+      setCameraOpen(true);
       return;
     }
     pushMessage({ role: "user", text: action.label });
     void deliver(skipPhoto(state));
   }
 
-  function handleFiles(files: FileList | null) {
+  function handleFiles(files: FileList | null, input: HTMLInputElement | null) {
     if (!files || files.length === 0) return;
-    handlePhotos(
-      files.length,
-      files.length === 1 ? "Uploaded a photo" : `Uploaded ${files.length} photos`,
-    );
-    if (fileRef.current) fileRef.current.value = "";
+    const urls = [...files]
+      .filter((file) => file.type.startsWith("image/"))
+      .map((file) => URL.createObjectURL(file));
+    if (urls.length > 0) {
+      handlePhotos(
+        urls.length === 1 ? "Uploaded a photo" : `Uploaded ${urls.length} photos`,
+        urls,
+      );
+    }
+    if (input) input.value = "";
   }
+
+  const handleCapture = useCallback(
+    (dataUrl: string) => {
+      setCameraOpen(false);
+      handlePhotos("Captured a photo with the camera", [dataUrl]);
+    },
+    [handlePhotos],
+  );
+
+  // No camera available (denied, missing, or insecure origin): fall back to
+  // the native capture input — on phones that opens the camera app directly.
+  const handleCameraUnavailable = useCallback(() => {
+    setCameraOpen(false);
+    captureRef.current?.click();
+  }, []);
 
   function restart() {
     cancelledRef.current = true;
@@ -326,6 +354,19 @@ export function ConversationWorkspace(props: StartOptions) {
                     }`}
                   >
                     {message.text}
+                    {message.photos && message.photos.length > 0 && (
+                      <span className="mt-2 flex flex-wrap gap-2">
+                        {message.photos.map((src, index) => (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            key={index}
+                            src={src}
+                            alt={`Attached photo ${index + 1}`}
+                            className="h-24 w-24 rounded-xl border border-white/30 object-cover"
+                          />
+                        ))}
+                      </span>
+                    )}
                   </div>
                 ),
               )}
@@ -408,8 +449,21 @@ export function ConversationWorkspace(props: StartOptions) {
                 accept="image/*"
                 multiple
                 className="hidden"
-                onChange={(event) => handleFiles(event.target.files)}
+                onChange={(event) =>
+                  handleFiles(event.target.files, fileRef.current)
+                }
                 aria-label="Upload photos"
+              />
+              <input
+                ref={captureRef}
+                type="file"
+                accept="image/*"
+                capture="environment"
+                className="hidden"
+                onChange={(event) =>
+                  handleFiles(event.target.files, captureRef.current)
+                }
+                aria-label="Take a photo with your device camera"
               />
               <button
                 type="button"
@@ -422,9 +476,9 @@ export function ConversationWorkspace(props: StartOptions) {
               </button>
               <button
                 type="button"
-                onClick={() => handlePhotos(1, "Captured a photo with the camera")}
+                onClick={() => setCameraOpen(true)}
                 aria-label="Take a photo"
-                title="Take a photo (simulated)"
+                title="Take a photo"
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-muted hover:bg-cloud hover:text-blue"
               >
                 <Camera className="h-4.5 w-4.5" aria-hidden />
@@ -484,7 +538,7 @@ export function ConversationWorkspace(props: StartOptions) {
           </div>
           {brief && (
             <div className="rounded-3xl border border-line bg-white p-5">
-              <LiveJobSummary brief={brief} />
+              <LiveJobSummary brief={brief} photoUrls={photoUrls} />
             </div>
           )}
         </aside>
@@ -507,7 +561,7 @@ export function ConversationWorkspace(props: StartOptions) {
           >
             <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-line" aria-hidden />
             <JobProgress current={progressStep} />
-            <div className="mt-6">{brief && <LiveJobSummary brief={brief} />}</div>
+            <div className="mt-6">{brief && <LiveJobSummary brief={brief} photoUrls={photoUrls} />}</div>
             <button
               type="button"
               onClick={() => setSummaryOpen(false)}
@@ -520,6 +574,14 @@ export function ConversationWorkspace(props: StartOptions) {
       )}
 
       {/* Exit confirmation */}
+      {cameraOpen && (
+        <CameraCaptureModal
+          onCapture={handleCapture}
+          onClose={() => setCameraOpen(false)}
+          onUnavailable={handleCameraUnavailable}
+        />
+      )}
+
       {exitConfirm && (
         <div className="fixed inset-0 z-40 flex items-center justify-center p-4">
           <button

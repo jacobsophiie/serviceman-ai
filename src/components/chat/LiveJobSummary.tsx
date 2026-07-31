@@ -21,7 +21,13 @@ function Row({ label, value }: { label: string; value?: string }) {
 /**
  * The live job brief that assembles itself as the conversation progresses.
  */
-export function LiveJobSummary({ brief }: { brief: JobBrief }) {
+export function LiveJobSummary({
+  brief,
+  photoUrls = [],
+}: {
+  brief: JobBrief;
+  photoUrls?: string[];
+}) {
   return (
     <div>
       <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">
@@ -48,15 +54,24 @@ export function LiveJobSummary({ brief }: { brief: JobBrief }) {
             {brief.photos > 0 ? (
               <span className="flex gap-1.5" aria-label={`${brief.photos} photos attached`}>
                 {Array.from({ length: Math.min(brief.photos, 4) }).map(
-                  (_, index) => (
-                    <span
-                      key={index}
-                      className="camera-preview flex h-10 w-10 items-center justify-center rounded-lg text-white/70"
-                      aria-hidden
-                    >
-                      <Camera className="h-4 w-4" />
-                    </span>
-                  ),
+                  (_, index) =>
+                    photoUrls[index] ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={index}
+                        src={photoUrls[index]}
+                        alt={`Attached photo ${index + 1}`}
+                        className="h-10 w-10 rounded-lg object-cover"
+                      />
+                    ) : (
+                      <span
+                        key={index}
+                        className="camera-preview flex h-10 w-10 items-center justify-center rounded-lg text-white/70"
+                        aria-hidden
+                      >
+                        <Camera className="h-4 w-4" />
+                      </span>
+                    ),
                 )}
                 {brief.photos > 4 && (
                   <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-cloud text-xs font-semibold text-muted">

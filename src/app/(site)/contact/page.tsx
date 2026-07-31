@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Mail, MessageCircle } from "lucide-react";
+import { sendLead } from "@/lib/lead";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
@@ -33,9 +34,8 @@ export default function ContactPage() {
               Message received
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Thanks for getting in touch. This is a prototype, so no message
-              was actually sent — but in the live product we&rsquo;d reply to
-              your email within one business day.
+              Thanks for getting in touch. We&rsquo;ll reply to your email
+              within one business day.
             </p>
             <button
               type="button"
@@ -49,6 +49,14 @@ export default function ContactPage() {
           <form
             onSubmit={(event) => {
               event.preventDefault();
+              const form = new FormData(event.currentTarget);
+              sendLead("New contact message", {
+                Type: "Contact message",
+                Name: String(form.get("name") ?? ""),
+                Email: String(form.get("email") ?? ""),
+                Topic: String(form.get("topic") ?? ""),
+                Message: String(form.get("message") ?? ""),
+              });
               setSent(true);
             }}
             className="rounded-3xl border border-line bg-white p-6 sm:p-8"
@@ -60,6 +68,7 @@ export default function ContactPage() {
                 </label>
                 <input
                   id="contact-name"
+                  name="name"
                   type="text"
                   required
                   autoComplete="name"
@@ -72,6 +81,7 @@ export default function ContactPage() {
                 </label>
                 <input
                   id="contact-email"
+                  name="email"
                   type="email"
                   required
                   autoComplete="email"
@@ -85,6 +95,7 @@ export default function ContactPage() {
               </label>
               <select
                 id="contact-topic"
+                name="topic"
                 className="rounded-xl border border-line bg-cloud px-4 py-3 text-[15px] text-ink focus:border-blue focus:outline-none"
               >
                 <option>A question about how it works</option>
@@ -100,6 +111,7 @@ export default function ContactPage() {
               </label>
               <textarea
                 id="contact-message"
+                name="message"
                 rows={5}
                 required
                 className="rounded-xl border border-line bg-cloud px-4 py-3 text-[15px] text-ink focus:border-blue focus:outline-none"

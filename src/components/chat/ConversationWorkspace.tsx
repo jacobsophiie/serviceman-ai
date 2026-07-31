@@ -24,6 +24,7 @@ import {
   type SafetyNotice,
   type StartOptions,
 } from "@/lib/engine";
+import { sendLead } from "@/lib/lead";
 import { Logo } from "@/components/Logo";
 import { CameraCaptureModal } from "@/components/chat/CameraCaptureModal";
 import { SafetyAlert } from "@/components/chat/SafetyAlert";
@@ -257,8 +258,28 @@ export function ConversationWorkspace(props: StartOptions) {
   }
 
   function submitJob() {
-    setReference(makeReference());
+    const ref = makeReference();
+    setReference(ref);
     setSubmitted(true);
+    const b = stateRef.current?.brief;
+    if (b) {
+      sendLead(`New job lead: ${b.title ?? b.problem ?? "Job request"} (${ref})`, {
+        Type: "Job request",
+        Reference: ref,
+        Trade: b.tradeName,
+        Problem: b.problem,
+        "Visible issue": b.visibleIssue,
+        Urgency: b.urgency,
+        Property: b.propertyType,
+        Location: b.suburb,
+        Photos: b.photos,
+        Name: b.name,
+        "Preferred contact": b.contactMethod,
+        Mobile: b.mobile,
+        Email: b.email,
+        Notes: b.notes.join(" | ") || undefined,
+      });
+    }
   }
 
   const brief = engineState?.brief;
@@ -501,7 +522,7 @@ export function ConversationWorkspace(props: StartOptions) {
                 onClick={() => setMicActive(!micActive)}
                 aria-pressed={micActive}
                 aria-label="Voice input"
-                title="Voice input (simulated in this prototype)"
+                title="Voice input (coming soon)"
                 className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors ${
                   micActive
                     ? "soft-pulse bg-danger/10 text-danger"
@@ -521,8 +542,8 @@ export function ConversationWorkspace(props: StartOptions) {
             </form>
             {micActive && (
               <p className="mx-auto mt-2 max-w-2xl px-1 text-xs text-muted">
-                Voice input is simulated in this prototype — type your answer
-                instead.
+                Voice input isn&rsquo;t available just yet — type your
+                answer instead.
               </p>
             )}
           </div>

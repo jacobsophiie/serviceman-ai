@@ -4,7 +4,7 @@ import type { JobBrief, Trade } from "@/lib/types";
 import type { LocationArea } from "@/lib/types";
 
 /*
- * Frontend prototype only.
+ * Runs entirely in the browser.
  *
  * This is a simple rule-based conversation engine that simulates the
  * serviceman.ai job assistant. It is not a real AI model — it matches

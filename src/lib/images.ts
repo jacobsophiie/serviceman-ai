@@ -1,6 +1,6 @@
 /**
  * Local image assets (stored in /public/images) with descriptive alt text.
- * Photos are free-licence images downloaded at build time for the prototype.
+ * Photos are free-licence images bundled with the site.
  */
 
 export interface TradeImage {

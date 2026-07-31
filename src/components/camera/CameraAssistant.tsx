@@ -412,7 +412,7 @@ export function CameraAssistant({
           <p className="mt-6 text-sm leading-relaxed text-muted">
             serviceman.ai will only access your camera after you give
             permission — your browser will ask you to confirm. In this
-            prototype the preview stays on your device and nothing is
+            meantime the preview stays on your device and nothing is
             uploaded; the AI conversation is simulated.
           </p>
         </div>
@@ -441,7 +441,7 @@ export function CameraAssistant({
                 serviceman.ai uses your camera so the AI agent can see the
                 problem while you talk it through. After you select Allow,
                 your browser will ask to confirm. The preview stays on your
-                device — nothing is uploaded in this prototype.
+                device — nothing is uploaded without your say-so.
               </p>
               <div className="mt-5 flex gap-2.5">
                 <button
@@ -539,7 +539,7 @@ export function CameraAssistant({
         <div className="relative z-10 mt-3 flex justify-center">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1 text-[11px] text-white/80 backdrop-blur">
             <Mic className="soft-pulse h-3 w-3 text-success" aria-hidden />
-            Microphone on — voice is simulated in this prototype
+            Microphone on — voice replies aren't available just yet
           </span>
         </div>
 

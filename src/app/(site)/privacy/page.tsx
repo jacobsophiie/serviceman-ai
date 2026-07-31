@@ -28,8 +28,8 @@ const sections = [
     body: "You can review and edit every part of your job request before it is submitted, choose how tradies contact you, and ask us to delete your information at any time by contacting hello@serviceman.ai.",
   },
   {
-    heading: "This prototype",
-    body: "This website is a frontend prototype. No information you enter is stored, transmitted or sent to any business — conversations exist only in your browser and are gone when you leave the page.",
+    heading: "What happens to your job request",
+    body: "When you submit a job request, registration or message, the details you provide are sent securely to the serviceman.ai team so we can arrange quotes and follow up with you. We don't sell your information or use it for anything other than organising your job.",
   },
 ];
 

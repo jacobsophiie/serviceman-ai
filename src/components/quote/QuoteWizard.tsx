@@ -10,6 +10,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { detectTrade, getTrade } from "@/lib/data/trades";
+import { sendLead } from "@/lib/lead";
 import { SearchingSteps } from "@/components/SearchingSteps";
 import { getLocation } from "@/lib/data/locations";
 import {
@@ -227,10 +228,7 @@ export function QuoteWizard({
           })}
         </dl>
 
-        <p className="mt-5 rounded-2xl bg-sun-tint px-4 py-3 text-sm leading-relaxed text-ink">
-          This is a demo prototype — your request has not been sent to any real
-          businesses, and your details are not stored.
-        </p>
+
 
         <Link
           href="/"
@@ -349,7 +347,16 @@ export function QuoteWizard({
               noValidate
               onSubmit={(event) => {
                 event.preventDefault();
-                if (validateContact()) setPhase("searching");
+                if (!validateContact()) return;
+                sendLead(`New job lead: ${prompt || tradeName || "Job request"}`, {
+                  Type: "Job request (quick form)",
+                  Trade: tradeName,
+                  Job: prompt || undefined,
+                  Location: location.trim(),
+                  Name: contact.name,
+                  Mobile: contact.phone,
+                });
+                setPhase("searching");
               }}
             >
               <h2 className="font-display text-xl font-bold text-navy sm:text-2xl">
@@ -405,7 +412,7 @@ export function QuoteWizard({
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </button>
               <p className="mt-3 text-xs leading-relaxed text-muted">
-                Demo prototype — your details are not stored or sent anywhere.
+                Your details are only used to send you quotes for this job.
               </p>
             </form>
           )}

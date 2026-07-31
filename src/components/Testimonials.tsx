@@ -4,7 +4,7 @@ import { reviewsFor } from "@/lib/data/reviews";
 /**
  * Review wall in the style of the big trades marketplaces — star rows, a
  * conversational quote, a name and suburb, and a trade tag. Content is
- * illustrative for the prototype (the footer carries the demo notice).
+ * illustrative while the review network grows.
  * Pass `tradeSlug` on trade pages so the reviews match the page.
  */
 const tagTiles = [

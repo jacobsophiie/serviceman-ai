@@ -14,9 +14,6 @@ export function Footer() {
               Tell us what you need. We&rsquo;ll get it sorted — with a clear
               job request sent to suitable local tradies.
             </p>
-            <p className="mt-6 inline-block rounded-full border border-white/20 px-3 py-1 text-xs text-white/60">
-              Demo prototype — no jobs are sent to real businesses
-            </p>
           </div>
 
           <nav aria-label="Popular services">
@@ -86,7 +83,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} serviceman.ai — a frontend prototype.</p>
+          <p>© {new Date().getFullYear()} serviceman.ai. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="transition-colors hover:text-white">
               Privacy

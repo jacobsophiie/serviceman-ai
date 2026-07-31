@@ -128,10 +128,6 @@ export function SubmissionConfirmation({
         ))}
       </dl>
 
-      <p className="mt-5 rounded-2xl border border-warning/30 bg-warning/5 px-4 py-3 text-center text-sm text-ink">
-        Demo mode: No information has been sent to real trades businesses.
-      </p>
-
       <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
         <button
           type="button"

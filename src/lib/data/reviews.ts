@@ -1,7 +1,6 @@
 /**
- * Illustrative reviews for the prototype (the footer carries the demo
- * notice). Each trade gets its own set so landing pages feel relevant;
- * pages without a trade context use the generic set.
+ * Illustrative reviews. Each trade gets its own set so landing pages feel
+ * relevant; pages without a trade context use the generic set.
  */
 
 export interface Review {

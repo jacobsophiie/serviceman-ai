@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { ArrowRight, BadgeCheck, Check } from "lucide-react";
 import { trades } from "@/lib/data/trades";
+import { sendLead } from "@/lib/lead";
 
 /**
- * Mock business registration form. The prototype has no backend, so
- * "submitting" validates locally and shows a confirmation — nothing is
- * stored or sent, and the form says so.
+ * Business registration form. Submissions are emailed to the serviceman.ai
+ * inbox for manual follow-up and verification.
  */
 
 const states = ["QLD", "NSW", "VIC", "ACT", "SA", "WA", "TAS", "NT"];
@@ -163,12 +163,8 @@ export function BusinessSignup() {
           <strong className="font-semibold text-ink">
             {fields.suburb.trim()}, {fields.state}
           </strong>
-          . In the live product, the next step would be verifying your
-          licence and insurance details before job requests start arriving.
-        </p>
-        <p className="mt-4 rounded-2xl bg-sun-tint px-4 py-3 text-sm leading-relaxed text-ink">
-          This is a demo prototype — your details have not been stored or
-          sent anywhere.
+          . Our team will be in touch to verify your licence and insurance
+          before job requests start arriving.
         </p>
         <button
           type="button"
@@ -193,7 +189,25 @@ export function BusinessSignup() {
       noValidate
       onSubmit={(event) => {
         event.preventDefault();
-        if (validate()) setSubmitted(true);
+        if (!validate()) return;
+        sendLead(`New business registration: ${fields.businessName.trim()}`, {
+          Type: "Business registration",
+          Business: fields.businessName.trim(),
+          Contact: fields.contactName.trim(),
+          Phone: fields.phone.trim(),
+          Email: fields.email.trim(),
+          ABN: fields.abn.trim() || undefined,
+          Licence: fields.licence.trim() || undefined,
+          Trades: trades
+            .filter((t) => selectedTrades.includes(t.slug))
+            .map((t) => t.category)
+            .join(", "),
+          Suburb: `${fields.suburb.trim()}, ${fields.state}`,
+          Travel: fields.travel,
+          Website: fields.website.trim() || undefined,
+          About: fields.about.trim() || undefined,
+        });
+        setSubmitted(true);
       }}
       className="rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8"
     >
@@ -399,9 +413,8 @@ export function BusinessSignup() {
       </button>
 
       <p className="mt-4 text-sm leading-relaxed text-muted">
-        This is a demo prototype — your details are not stored or sent
-        anywhere. In the live product, we&rsquo;d verify your licence and
-        insurance before any job requests are sent to you.
+        We&rsquo;ll verify your licence and insurance before any job
+        requests are sent to you.
       </p>
     </form>
   );

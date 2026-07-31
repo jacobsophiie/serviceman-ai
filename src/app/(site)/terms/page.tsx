@@ -28,8 +28,8 @@ const sections = [
     body: "Quotes, scheduling, workmanship and payment are matters between you and the trades business you engage. We recommend confirming licences and insurance appropriate to the work before it begins.",
   },
   {
-    heading: "This prototype",
-    body: "This website is a demonstration frontend. Job requests are not sent to any real business, no accounts exist and no data is stored. These terms are illustrative of the live product.",
+    heading: "Early access",
+    body: "serviceman.ai is in early access. Job requests are received and matched by our team, and coverage may vary by trade and area while we grow the network.",
   },
 ];
 

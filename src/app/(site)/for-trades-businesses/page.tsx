@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ClipboardCheck, MapPin, MessageSquareText } from "lucide-react";
 import { BusinessSignup } from "@/components/BusinessSignup";
 
@@ -30,25 +31,43 @@ const benefits = [
 export default function ForTradesBusinessesPage() {
   return (
     <>
-      <section className="border-b border-line bg-white">
-        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
-          <p className="text-sm font-semibold uppercase tracking-wide text-blue">
-            For trades businesses
-          </p>
-          <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
-            Clear jobs, ready to quote
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-            serviceman.ai turns customer conversations into structured job
-            requests and sends them to suitable local businesses. No chasing
-            vague enquiries — the details arrive up front.
-          </p>
-          <Link
-            href="#register"
-            className="mt-7 inline-block rounded-full bg-blue px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
-          >
-            Register your business
-          </Link>
+      {/* Hero — photo bleeds in from the right, fading into the text side */}
+      <section className="relative overflow-hidden border-b border-line bg-white">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/trades-hero.jpg"
+            alt="An electrician checking his phone beside his work ute"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[72%_center]"
+          />
+          {/* Solid on the text side, transparent over the photo */}
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-white from-35% via-white/90 via-60% to-white/55 lg:from-22% lg:via-white/70 lg:via-45% lg:to-transparent lg:to-70%"
+            aria-hidden
+          />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
+          <div className="max-w-xl">
+            <p className="text-sm font-semibold uppercase tracking-wide text-blue">
+              For trades businesses
+            </p>
+            <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
+              Clear jobs, ready to quote
+            </h1>
+            <p className="mt-4 max-w-md text-lg leading-relaxed text-ink/80">
+              serviceman.ai turns customer conversations into structured job
+              requests and sends them to suitable local businesses. No chasing
+              vague enquiries — the details arrive up front.
+            </p>
+            <Link
+              href="#register"
+              className="mt-7 inline-block rounded-full bg-blue px-7 py-3.5 text-base font-semibold text-white shadow-lift transition-colors hover:bg-blue-deep"
+            >
+              Register your business
+            </Link>
+          </div>
         </div>
       </section>
 

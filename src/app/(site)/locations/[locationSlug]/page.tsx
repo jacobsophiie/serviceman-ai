@@ -48,8 +48,8 @@ export default async function LocationPage({
       <LandingHero
         image={cityImageFor(location)}
         eyebrow={`${location.name}, ${location.stateAbbr} · ${location.postcodeRange}`}
-        title={`Find local tradies ${inLoc}`}
-        copy="Tell us what needs doing. We'll match you with licensed businesses servicing your suburb, who come back to you with quotes."
+        title={`Let our AI agent find the best tradies ${inLoc}`}
+        copy="Tell us the job and your AI agent finds licensed trades businesses servicing your suburb — then brings their quotes back to you."
         defaultSuburb={location.name}
         locationSlug={location.slug}
       />

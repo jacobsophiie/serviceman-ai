@@ -11,8 +11,8 @@ export function Footer() {
           <div>
             <Logo dark />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
-              Tell us what you need. We&rsquo;ll get it sorted — with a clear
-              job request sent to suitable local tradies.
+              Tell us the job. Your AI agent finds the best local tradies and
+              brings their quotes back to you.
             </p>
           </div>
 

@@ -20,8 +20,8 @@ export default function LocationsIndexPage() {
       <LandingHero
         image={heroImage}
         eyebrow="Australia wide"
-        title="Local tradies, wherever you are"
-        copy="Tell us what needs doing and where. We'll match you with licensed businesses servicing your suburb, who come back to you with quotes."
+        title="An AI agent that finds tradies, wherever you are"
+        copy="Tell us the job and where it is. Your AI agent finds licensed trades businesses servicing your suburb and brings their quotes back to you."
       />
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">

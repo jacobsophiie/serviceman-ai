@@ -21,8 +21,8 @@ export function HowItWorks({
       copy: "Describe the job in your own words and answer a few quick questions. You don't need to know what it's called or which trade you need.",
     },
     {
-      title: `Let AI source trusted local ${tradesLabel}`,
-      copy: `Our AI turns your answers into a clear job brief and sends it to licensed local ${tradesLabel} servicing your area.`,
+      title: `Your AI agent finds the best local ${tradesLabel}`,
+      copy: `It turns your answers into a clear job brief, then goes out to licensed ${tradesLabel} in your area and gets them to quote.`,
     },
     {
       title: "Get multiple quotes, choose the best",

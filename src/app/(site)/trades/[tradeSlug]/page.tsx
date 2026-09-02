@@ -53,7 +53,7 @@ export default async function TradePage({
       <LandingHero
         image={image}
         eyebrow={trade.category}
-        title={`Need ${article} ${trade.singular}? Get free quotes.`}
+        title={`Let our AI agent find the best ${trade.name.toLowerCase()} near you`}
         copy={trade.intro}
         defaultJob={`I need ${article} ${trade.singular}`}
         tradeSlug={trade.slug}

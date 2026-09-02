@@ -9,10 +9,11 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
-import { heroImage, tradeImage } from "@/lib/images";
-import { getTrade, trades } from "@/lib/data/trades";
+import { heroImage } from "@/lib/images";
+import { trades } from "@/lib/data/trades";
 import { inPlace, majorLocations } from "@/lib/data/locations";
 import { HomeSearch } from "@/components/HomeSearch";
+import { ServiceTiles } from "@/components/ServiceTiles";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Testimonials } from "@/components/Testimonials";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -21,22 +22,11 @@ import { productFaqs } from "@/lib/data/faqs";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "serviceman.ai — Find trusted local tradies. Get free quotes.",
+    absolute: "serviceman.ai — Your AI agent finds the best local tradies",
   },
   description:
-    "Tell us what needs doing and answer a few quick questions. We'll send your job to licensed local tradies, who come back to you with quotes.",
+    "Tell us the job and your AI agent gets to work — asking the right questions, writing the brief and finding licensed local tradies to quote. Free, no obligation.",
 };
-
-const popularServices = [
-  "plumber",
-  "electrician",
-  "handyman",
-  "painter",
-  "air-conditioning",
-  "gardener",
-  "cleaner",
-  "builder",
-];
 
 const trustPoints = [
   {
@@ -90,13 +80,13 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24">
           <div className="max-w-2xl">
             <h1 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Find trusted local tradies.
-              <br className="hidden sm:block" /> Get free quotes.
+              Tell us the job.
+              <br className="hidden sm:block" /> Our AI agent finds the best local tradies.
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/85">
-              Tell us what you need done. We&rsquo;ll match you with licensed
-              businesses in your area who come back to you with quotes — free,
-              with no obligation to hire.
+              Describe what needs doing and your AI agent gets to work: it asks
+              the right questions, writes the brief, and tracks down licensed
+              trades businesses in your area to quote. Free, no obligation.
             </p>
           </div>
           <div className="mt-8 max-w-3xl">
@@ -122,34 +112,9 @@ export default function HomePage() {
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
-        <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
-          {popularServices.map((slug) => {
-            const trade = getTrade(slug);
-            if (!trade) return null;
-            const image = tradeImage(slug);
-            return (
-              <li key={slug}>
-                <Link href={`/trades/${slug}`} className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-cloud">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes="(min-width: 768px) 25vw, 50vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <h3 className="mt-3 font-display text-base font-semibold text-navy group-hover:text-blue">
-                    {trade.category}
-                  </h3>
-                  <p className="mt-0.5 text-sm text-muted">
-                    {trade.commonJobs.slice(0, 2).join(" · ")}
-                  </p>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="mt-8">
+          <ServiceTiles />
+        </div>
         <Link
           href="/trades"
           className="mt-8 inline-flex items-center gap-1 text-sm font-semibold text-blue hover:underline sm:hidden"
@@ -190,9 +155,9 @@ export default function HomePage() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
               Instead of ringing around and explaining the job five times,
-              explain it once. Our AI asks the questions a tradie would ask,
-              adds your photos, and writes a brief that licensed businesses
-              can quote from straight away.
+              explain it once. Your AI agent asks the questions a tradie would
+              ask, adds your photos, writes the brief — then goes and finds
+              licensed businesses to quote on it.
             </p>
             <ul className="mt-6 space-y-3">
               {briefChecks.map((item) => (

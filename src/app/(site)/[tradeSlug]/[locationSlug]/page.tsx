@@ -71,7 +71,7 @@ export default async function TradeLocationPage({
       <LandingHero
         image={image}
         eyebrow={`${trade.category} · ${location.name}, ${location.stateAbbr}`}
-        title={`Need ${article} ${trade.singular} ${inLoc}?`}
+        title={`Let our AI agent find the best ${trade.name.toLowerCase()} ${inLoc}`}
         copy={`Tell us about the ${trade.category.toLowerCase()} job. We'll ask the right questions and send a clear brief to licensed local ${trade.name.toLowerCase()} servicing ${place}.`}
         defaultJob={prompt}
         defaultSuburb={location.name}

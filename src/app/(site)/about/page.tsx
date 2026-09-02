@@ -1,27 +1,56 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import {
+  ArrowRight,
   Clock3,
   HeartHandshake,
   Lightbulb,
   MessageSquareText,
   ShieldCheck,
   Sparkles,
+  X,
 } from "lucide-react";
+import { heroImage } from "@/lib/images";
+import { majorLocations } from "@/lib/data/locations";
+import { LandingHero } from "@/components/LandingHero";
+import { Testimonials } from "@/components/Testimonials";
 import { FinalCTA } from "@/components/FinalCTA";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "serviceman.ai makes organising trade services simpler. Tell an AI agent what you need and we'll prepare the request for suitable local trades businesses.",
+    "serviceman.ai makes organising trade services simpler. Tell us what you need and we'll turn it into a clear job brief for licensed local tradies.",
 };
 
 const struggles = [
-  "They don't know which trade they need",
-  "They can't explain the problem clearly",
-  "They don't know which details matter",
-  "They spend time calling multiple businesses",
-  "They repeat the same information several times",
-  "They receive unclear or mismatched responses",
+  "Not knowing which trade you actually need",
+  "Struggling to explain the problem clearly",
+  "Not knowing which details matter to a tradie",
+  "Ringing around and leaving voicemails",
+  "Repeating the same story to every business",
+  "Getting quotes that don't match the job",
+];
+
+const audiences = [
+  {
+    title: "For homeowners and renters",
+    copy: "Describe the job once, in plain English. We ask the right questions, write the brief and bring licensed local tradies back to you with quotes.",
+    href: "/get-started",
+    label: "Get free quotes",
+  },
+  {
+    title: "For trades businesses",
+    copy: "Job requests arrive with the details already collected — problem, photos, urgency, location — from customers in the suburbs you service.",
+    href: "/for-trades-businesses",
+    label: "List your business",
+  },
+  {
+    title: "AI that asks, not diagnoses",
+    copy: "Our AI does the admin: the questions, the brief, the matching. Diagnosis and advice stay with the licensed tradie who turns up.",
+    href: "/how-it-works",
+    label: "See how it works",
+  },
 ];
 
 const principles = [
@@ -47,88 +76,156 @@ const principles = [
   },
   {
     icon: HeartHandshake,
-    title: "Keep customers informed",
-    copy: "You always see exactly what will be sent, and you stay in control of it.",
+    title: "Keep customers in control",
+    copy: "You see exactly what will be sent, and you choose who to go with.",
   },
   {
     icon: ShieldCheck,
     title: "Use AI responsibly",
-    copy: "Our agent gathers information — it never replaces licensed trade advice.",
+    copy: "Our AI gathers information — it never replaces licensed trade advice.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-line bg-white">
-        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
-          <h1 className="font-display text-4xl font-bold tracking-tight text-navy sm:text-5xl">
-            Making it easier to explain what needs fixing
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            serviceman.ai was created to make organising trade services
-            simpler. Instead of searching through directories or trying to
-            work out who to call, customers can simply describe the problem
-            to an AI agent. The agent asks the right questions, gathers the
-            important details and prepares the request for suitable local
-            trades businesses.
+      <LandingHero
+        image={{
+          src: "/images/trades/air-conditioning.jpg",
+          alt: "An air-conditioning technician working on a rooftop unit",
+        }}
+        imageClassName="-scale-x-100 object-[40%_center]"
+        eyebrow="About serviceman.ai"
+        title="Making it easier to explain what needs fixing"
+        copy="Most people only organise a tradie a few times a year — and it shows. We built serviceman.ai so you can describe the problem once, in your own words, and let the AI turn it into a job brief that licensed local tradies can quote from."
+        showSearch={false}
+        cta={{ label: "See how it works", href: "/how-it-works" }}
+      />
+
+      {/* The problem */}
+      <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2">
+        <div>
+          <h2 className="font-display text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+            Sound familiar?
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-muted">
+            Getting a tradie shouldn&rsquo;t be the hardest part of getting
+            something fixed. But when you only do it a few times a year, the
+            same things trip everyone up.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-muted">
+            serviceman.ai takes that friction out. You describe the everyday
+            problem; we handle the trade knowledge, the questions and the
+            ring-around.
           </p>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <h2 className="font-display text-3xl font-bold text-navy">
-          The problem we&rsquo;re solving
-        </h2>
-        <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
-          Most people only organise a tradie a few times a year, and it shows.
-          Customers commonly struggle because:
-        </p>
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="divide-y divide-line rounded-lg border border-line bg-white">
           {struggles.map((struggle) => (
             <li
               key={struggle}
-              className="rounded-lg border border-line bg-white px-5 py-4 text-[15px] leading-relaxed text-ink"
+              className="flex items-center gap-3 px-5 py-3.5 text-[15px] text-ink"
             >
+              <X className="h-4 w-4 shrink-0 text-muted" aria-hidden />
               {struggle}
             </li>
           ))}
         </ul>
-        <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted">
-          serviceman.ai solves this by helping customers turn an everyday
-          problem into a clear job request — no trade knowledge required.
-        </p>
       </section>
 
-      <section className="border-t border-line bg-white">
+      {/* Who it's for */}
+      <section className="border-y border-line bg-cloud">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-          <h2 className="font-display text-3xl font-bold text-navy">
-            What we stand for
+          <h2 className="font-display text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+            Built for both sides of the job
           </h2>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {principles.map((principle) => (
-              <li
-                key={principle.title}
-                className="flex flex-col gap-3 rounded-lg border border-line bg-cloud p-6"
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {audiences.map((audience) => (
+              <div
+                key={audience.title}
+                className="flex flex-col rounded-lg border border-line bg-white p-6"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-blue">
-                  <principle.icon className="h-5 w-5" aria-hidden />
-                </span>
                 <h3 className="font-display text-lg font-semibold text-navy">
-                  {principle.title}
+                  {audience.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted">
-                  {principle.copy}
+                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-muted">
+                  {audience.copy}
                 </p>
-              </li>
+                <Link
+                  href={audience.href}
+                  className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-blue hover:underline"
+                >
+                  {audience.label}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
+      {/* Principles */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <h2 className="font-display text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+          What we stand for
+        </h2>
+        <ul className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {principles.map((principle) => (
+            <li key={principle.title} className="border-t-2 border-line pt-5">
+              <principle.icon className="h-6 w-6 text-blue" aria-hidden />
+              <h3 className="mt-4 font-display text-lg font-semibold text-navy">
+                {principle.title}
+              </h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-muted">
+                {principle.copy}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Australian focus */}
+      <section className="border-y border-line bg-white">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+            <Image
+              src={heroImage.src}
+              alt={heroImage.alt}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h2 className="font-display text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+              Built for Australian homes and trades
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted">
+              Licensing, safety rules and the way tradies quote are different
+              here, so serviceman.ai is built around them: Australian trade
+              categories, licensed businesses only, and suburb-level matching
+              across our metro areas.
+            </p>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {majorLocations.map((location) => (
+                <li key={location.slug}>
+                  <Link
+                    href={`/locations/${location.slug}`}
+                    className="inline-block rounded-full border border-line bg-white px-3.5 py-1.5 text-sm font-medium text-navy transition-colors hover:border-blue hover:text-blue"
+                  >
+                    {location.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <Testimonials />
+
       <FinalCTA
         heading="See it for yourself"
-        copy="Describe a job — real or imagined — and watch the AI agent turn it into a clear, structured request."
+        copy="Describe a job — real or imagined — and watch the AI turn it into a clear, structured request."
       />
     </>
   );

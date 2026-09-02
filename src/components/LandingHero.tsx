@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { HomeSearch } from "@/components/HomeSearch";
 import { TrustBar } from "@/components/TrustBar";
 
@@ -18,6 +19,8 @@ export function LandingHero({
   locationSlug,
   tradesLabel,
   imageClassName = "",
+  showSearch = true,
+  cta,
 }: {
   image: { src: string; alt: string };
   eyebrow?: string;
@@ -30,6 +33,9 @@ export function LandingHero({
   tradesLabel?: string;
   /** Extra classes for the photo, e.g. an object-position. */
   imageClassName?: string;
+  /** Hide the job search (e.g. on the About page) and show `cta` instead. */
+  showSearch?: boolean;
+  cta?: { label: string; href: string };
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-navy">
@@ -60,17 +66,28 @@ export function LandingHero({
             {copy}
           </p>
         </div>
-        <div className="mt-8 max-w-3xl">
-          <HomeSearch
-            defaultJob={defaultJob}
-            defaultSuburb={defaultSuburb}
-            tradeSlug={tradeSlug}
-            locationSlug={locationSlug}
-          />
-        </div>
-        <div className="mt-5">
-          <TrustBar tone="dark" tradesLabel={tradesLabel} />
-        </div>
+        {showSearch ? (
+          <>
+            <div className="mt-8 max-w-3xl">
+              <HomeSearch
+                defaultJob={defaultJob}
+                defaultSuburb={defaultSuburb}
+                tradeSlug={tradeSlug}
+                locationSlug={locationSlug}
+              />
+            </div>
+            <div className="mt-5">
+              <TrustBar tone="dark" tradesLabel={tradesLabel} />
+            </div>
+          </>
+        ) : cta ? (
+          <Link
+            href={cta.href}
+            className="mt-8 inline-block rounded-md bg-white px-6 py-3 text-base font-semibold text-navy transition-colors hover:bg-cloud"
+          >
+            {cta.label}
+          </Link>
+        ) : null}
       </div>
     </section>
   );

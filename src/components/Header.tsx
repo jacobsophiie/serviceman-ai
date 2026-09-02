@@ -44,9 +44,9 @@ export function Header() {
           </Link>
           <Link
             href="/get-started"
-            className="whitespace-nowrap rounded-full bg-blue px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-deep"
+            className="whitespace-nowrap rounded-md bg-blue px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-deep"
           >
-            Describe your job
+            Get free quotes
           </Link>
         </div>
 
@@ -54,9 +54,9 @@ export function Header() {
         <div className="flex items-center gap-2 md:hidden">
           <Link
             href="/get-started"
-            className="rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-deep"
+            className="rounded-md bg-blue px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-deep"
           >
-            Start
+            Get quotes
           </Link>
           <button
             type="button"

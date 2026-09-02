@@ -620,6 +620,17 @@ function askSuburb(state: ConversationState): EngineResult {
   };
 }
 
+/** Ask where the job is — unless the customer already told us. */
+function nextAfterLocation(state: ConversationState): EngineResult {
+  if (state.brief.suburb) {
+    return beginJobQuestions(
+      state,
+      "Thanks. A few quick questions about the job.",
+    );
+  }
+  return askSuburb(state);
+}
+
 /** After the location is locked in, move on to the job questions. */
 function beginJobQuestions(
   state: ConversationState,
@@ -668,6 +679,8 @@ export interface StartOptions {
   tradeSlug?: string;
   presetJob?: string;
   locationSlug?: string;
+  /** Free-text suburb/postcode already given (e.g. the home page search). */
+  suburbText?: string;
   /** Photos already captured, e.g. carried over from the camera assistant. */
   initialPhotos?: number;
 }
@@ -681,6 +694,11 @@ export function startConversation(options: StartOptions = {}): EngineResult {
   };
   if (options.initialPhotos && options.initialPhotos > 0) {
     state.brief.photos = options.initialPhotos;
+  }
+  const suburbText = options.suburbText?.trim();
+  if (suburbText) {
+    state.brief.suburb = suburbText;
+    state.location = detectLocation(suburbText);
   }
 
   const messages: EngineMessage[] = [];
@@ -714,7 +732,7 @@ export function startConversation(options: StartOptions = {}): EngineResult {
     messages.push({
       text: `I can help you create a job request for ${options.presetJob.toLowerCase()}.`,
     });
-    const next = askSuburb(state);
+    const next = nextAfterLocation(state);
     return { ...next, messages: [...messages, ...next.messages] };
   }
 
@@ -737,7 +755,7 @@ export function startConversation(options: StartOptions = {}): EngineResult {
       messages.push({ text: `I can help with that.` });
     }
 
-    const next = askSuburb(state);
+    const next = nextAfterLocation(state);
     return { ...next, messages: [...messages, ...next.messages] };
   }
 
@@ -795,6 +813,7 @@ export function advance(
         const next = startConversation({
           initialMessage: text,
           tradeSlug: trade.slug,
+          suburbText: state.brief.suburb,
         });
         return withPrefix({
           ...next,
@@ -834,7 +853,7 @@ export function advance(
         detailQuestions,
         detailIndex: 0,
       };
-      return withPrefix(askSuburb(next));
+      return withPrefix(nextAfterLocation(next));
     }
 
     case "details": {

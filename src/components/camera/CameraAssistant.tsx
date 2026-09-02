@@ -539,7 +539,7 @@ export function CameraAssistant({
         <div className="relative z-10 mt-3 flex justify-center">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-black/45 px-3 py-1 text-[11px] text-white/80 backdrop-blur">
             <Mic className="soft-pulse h-3 w-3 text-success" aria-hidden />
-            Microphone on — voice replies aren't available just yet
+            Microphone on — voice replies aren&rsquo;t available just yet
           </span>
         </div>
 

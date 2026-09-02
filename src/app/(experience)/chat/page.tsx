@@ -25,6 +25,7 @@ export default async function ChatPage({
       tradeSlug={first("trade")}
       presetJob={first("job")}
       locationSlug={first("location")}
+      suburbText={first("suburb")}
       initialPhotos={Number(first("photos")) || undefined}
     />
   );

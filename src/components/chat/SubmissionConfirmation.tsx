@@ -128,20 +128,24 @@ export function SubmissionConfirmation({
         ))}
       </dl>
 
-      <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
+      <p className="mt-5 text-center text-sm leading-relaxed text-muted">
+        We&rsquo;ll text you as quotes come in. Log in any time to see them
+        side by side and choose one.
+      </p>
+      <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">
+        <Link
+          href="/login?next=/account"
+          className="flex-1 rounded-md bg-blue px-6 py-3.5 text-center text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+        >
+          Track your job
+        </Link>
         <button
           type="button"
           onClick={onRestart}
-          className="flex-1 rounded-md bg-blue px-6 py-3.5 text-center text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+          className="flex-1 rounded-md border border-line px-6 py-3.5 text-center text-base font-semibold text-navy transition-colors hover:border-blue hover:text-blue"
         >
           Submit another job
         </button>
-        <Link
-          href="/"
-          className="flex-1 rounded-md border border-line px-6 py-3.5 text-center text-base font-semibold text-navy transition-colors hover:border-blue hover:text-blue"
-        >
-          Return home
-        </Link>
       </div>
     </div>
   );

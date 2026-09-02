@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { AccountMenu } from "@/components/account/AccountMenu";
 
 const navLinks = [
   { href: "/how-it-works", label: "How it works" },
@@ -42,6 +43,7 @@ export function Header() {
           >
             For trades businesses
           </Link>
+          <AccountMenu />
           <Link
             href="/get-started"
             className="whitespace-nowrap rounded-md bg-blue px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-deep"
@@ -96,6 +98,15 @@ export function Header() {
                 className="block rounded-lg px-3 py-3 text-base font-medium text-muted hover:bg-cloud"
               >
                 For trades businesses
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/account"
+                onClick={() => setOpen(false)}
+                className="block rounded-lg px-3 py-3 text-base font-medium text-muted hover:bg-cloud"
+              >
+                My jobs / Log in
               </Link>
             </li>
           </ul>

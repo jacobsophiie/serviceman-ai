@@ -19,7 +19,7 @@ export function TradeAbout({ trade }: { trade: Trade }) {
   return (
     <section className="border-y border-line bg-white">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
           <Image
             src={image.src}
             alt={image.alt}
@@ -56,7 +56,7 @@ export function TradeAbout({ trade }: { trade: Trade }) {
             ))}
           </ul>
 
-          <p className="mt-6 flex gap-2.5 rounded-2xl border border-warning/30 bg-warning/5 px-4 py-3 text-sm leading-relaxed text-ink">
+          <p className="mt-6 flex gap-2.5 rounded-lg border border-warning/30 bg-warning/5 px-4 py-3 text-sm leading-relaxed text-ink">
             <ShieldAlert
               className="mt-0.5 h-4 w-4 shrink-0 text-warning"
               aria-hidden

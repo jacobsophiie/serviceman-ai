@@ -6,7 +6,7 @@ export function SafetyAlert({ notice }: { notice: SafetyNotice }) {
   return (
     <div
       role="alert"
-      className={`flex gap-3 rounded-2xl border p-4 ${
+      className={`flex gap-3 rounded-lg border p-4 ${
         danger
           ? "border-danger/30 bg-danger/5"
           : "border-warning/30 bg-warning/5"

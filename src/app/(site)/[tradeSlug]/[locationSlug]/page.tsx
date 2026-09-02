@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getTrade } from "@/lib/data/trades";
 import { getTradeDetail } from "@/lib/data/trade-detail";
 import { getLocation, inPlace, placeName } from "@/lib/data/locations";
 import { tradeImage } from "@/lib/images";
-import { JobStart } from "@/components/JobStart";
-import { TrustBar } from "@/components/TrustBar";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { TradeAbout } from "@/components/TradeAbout";
 import { Testimonials } from "@/components/Testimonials";
 import { HowItWorks } from "@/components/HowItWorks";
 import { FinalCTA } from "@/components/FinalCTA";
+import { LandingHero } from "@/components/LandingHero";
 
 export async function generateMetadata({
   params,
@@ -70,52 +68,20 @@ export default async function TradeLocationPage({
 
   return (
     <>
-      {/* 1. Hero and job entry */}
-      <section className="border-b border-line bg-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-14 pt-16 sm:px-6 sm:pb-16 sm:pt-20 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="flex flex-col">
-            <p className="flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-blue">
-              <MapPin className="h-4 w-4" aria-hidden />
-              {trade.category} · {location.name}, {location.stateAbbr}
-            </p>
-            <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
-              Need {article} {trade.singular} {inLoc}?
-            </h1>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-              Show us the {trade.category.toLowerCase()}{" "}
-              problem or describe it to our AI agent. We&rsquo;ll ask the right questions and
-              prepare a clear job request for suitable local{" "}
-              {trade.name.toLowerCase()} servicing {place}.
-            </p>
-            <div className="mt-8">
-              <JobStart
-                heading={`Tell us what you need ${article} ${trade.singular} for`}
-                defaultValue={prompt}
-                tradeSlug={trade.slug}
-                locationSlug={location.slug}
-              />
-            </div>
-            <div className="mt-7">
-              <TrustBar tradesLabel={trade.name.toLowerCase()} />
-            </div>
-          </div>
-          {/* Stretches to the height of the column beside it, so the hero reads
-              as one block rather than a photo with dead space beneath. */}
-          <div className="relative hidden min-h-[26rem] overflow-hidden rounded-3xl shadow-lift lg:block">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </section>
+      <LandingHero
+        image={image}
+        eyebrow={`${trade.category} · ${location.name}, ${location.stateAbbr}`}
+        title={`Need ${article} ${trade.singular} ${inLoc}?`}
+        copy={`Tell us about the ${trade.category.toLowerCase()} job. We'll ask the right questions and send a clear brief to licensed local ${trade.name.toLowerCase()} servicing ${place}.`}
+        defaultJob={prompt}
+        defaultSuburb={location.name}
+        tradeSlug={trade.slug}
+        locationSlug={location.slug}
+        tradesLabel={trade.name.toLowerCase()}
+      />
 
       {/* 2. How it works */}
-      <section className="bg-blue-tint/50">
+      <section className="border-b border-line bg-cloud">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <HowItWorks
             tradesLabel={trade.name.toLowerCase()}
@@ -138,7 +104,7 @@ export default async function TradeLocationPage({
             <li key={job}>
               <Link
                 href={`/chat?trade=${trade.slug}&location=${location.slug}&job=${encodeURIComponent(job)}`}
-                className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white px-5 py-4 text-[15px] font-medium text-ink transition-all hover:border-blue/40 hover:shadow-soft"
+                className="group flex items-center justify-between gap-3 rounded-lg border border-line bg-white px-5 py-4 text-[15px] font-medium text-ink transition-all hover:border-blue/40"
               >
                 {job}
                 <ArrowRight

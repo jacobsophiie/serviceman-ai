@@ -53,7 +53,7 @@ export default function ForTradesBusinessesPage() {
             <p className="text-sm font-semibold uppercase tracking-wide text-blue">
               For trades businesses
             </p>
-            <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
+            <h1 className="mt-2 font-display text-4xl font-bold tracking-tight text-navy sm:text-5xl">
               Clear jobs, ready to quote
             </h1>
             <p className="mt-4 max-w-md text-lg leading-relaxed text-ink/80">
@@ -63,7 +63,7 @@ export default function ForTradesBusinessesPage() {
             </p>
             <Link
               href="#register"
-              className="mt-7 inline-block rounded-full bg-blue px-7 py-3.5 text-base font-semibold text-white shadow-lift transition-colors hover:bg-blue-deep"
+              className="mt-7 inline-block rounded-md bg-blue px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
             >
               Register your business
             </Link>
@@ -76,7 +76,7 @@ export default function ForTradesBusinessesPage() {
           {benefits.map((benefit) => (
             <li
               key={benefit.title}
-              className="flex flex-col gap-3 rounded-2xl border border-line bg-white p-6"
+              className="flex flex-col gap-3 rounded-lg border border-line bg-white p-6"
             >
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cloud text-blue">
                 <benefit.icon className="h-5 w-5" aria-hidden />
@@ -92,7 +92,7 @@ export default function ForTradesBusinessesPage() {
       </section>
 
       {/* Registration form */}
-      <section id="register" className="border-t border-line bg-blue-tint/40 scroll-mt-8">
+      <section id="register" className="border-t border-line bg-cloud scroll-mt-8">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-blue">
@@ -122,7 +122,7 @@ export default function ForTradesBusinessesPage() {
               ].map((step, index) => (
                 <li key={step.title} className="flex items-start gap-4">
                   <span
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-blue bg-white font-display text-base font-extrabold text-blue"
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-blue bg-white font-display text-base font-bold text-blue"
                     aria-label={`Step ${index + 1}`}
                   >
                     {index + 1}

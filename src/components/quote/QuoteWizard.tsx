@@ -34,7 +34,7 @@ type Step =
   | { kind: "contact" };
 
 const inputClass =
-  "w-full rounded-2xl border border-line bg-cloud px-4 py-3.5 text-base text-ink placeholder:text-muted focus:border-blue focus:outline-none";
+  "w-full rounded-lg border border-line bg-cloud px-4 py-3.5 text-base text-ink placeholder:text-muted focus:border-blue focus:outline-none";
 
 export function QuoteWizard({
   prompt = "",
@@ -183,8 +183,8 @@ export function QuoteWizard({
       s.kind === "question" && answers[s.question.id] ? [s.question] : [],
     );
     return (
-      <div className="rise-in rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-mint-tint text-success">
+      <div className="rise-in rounded-lg border border-line bg-white p-6 sm:p-8">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-cloud text-blue">
           <BadgeCheck className="h-7 w-7" aria-hidden />
         </span>
         <h2 className="mt-5 font-display text-2xl font-bold text-navy">
@@ -201,7 +201,7 @@ export function QuoteWizard({
           couple of hours.
         </p>
 
-        <dl className="mt-6 space-y-3 rounded-2xl bg-cloud p-4 text-sm">
+        <dl className="mt-6 space-y-3 rounded-lg bg-cloud p-4 text-sm">
           {prompt && (
             <div>
               <dt className="font-semibold text-navy">Job</dt>
@@ -253,7 +253,7 @@ export function QuoteWizard({
         </p>
       )}
 
-      <div className="rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8">
+      <div className="rounded-lg border border-line bg-white p-6 sm:p-8">
         {/* Progress */}
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-semibold uppercase tracking-wide text-blue">
@@ -270,9 +270,9 @@ export function QuoteWizard({
             </button>
           )}
         </div>
-        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-blue-tint">
+        <div className="mt-3 h-1.5 overflow-hidden rounded-md bg-cloud">
           <div
-            className="h-full rounded-full bg-blue transition-all duration-300"
+            className="h-full rounded-md bg-blue transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -317,7 +317,7 @@ export function QuoteWizard({
               )}
               <button
                 type="submit"
-                className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+                className="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
               >
                 Next
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -406,7 +406,7 @@ export function QuoteWizard({
               </div>
               <button
                 type="submit"
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep sm:w-auto"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep sm:w-auto"
               >
                 Get quotes from tradies
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -461,10 +461,10 @@ function QuestionStep({
                 role="radio"
                 aria-checked={selected}
                 onClick={() => onRadio(option.value)}
-                className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-3.5 text-left text-[15px] font-medium transition-all ${
+                className={`flex items-center justify-between gap-3 rounded-lg border px-4 py-3.5 text-left text-[15px] font-medium transition-all ${
                   selected
-                    ? "border-blue bg-blue-tint text-navy"
-                    : "border-line bg-white text-ink hover:border-blue/40 hover:shadow-soft"
+                    ? "border-blue bg-cloud text-blue"
+                    : "border-line bg-white text-ink hover:border-blue/40"
                 }`}
               >
                 {option.label}
@@ -493,10 +493,10 @@ function QuestionStep({
                   type="button"
                   aria-pressed={selected}
                   onClick={() => onMultiToggle(option.value)}
-                  className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-3.5 text-left text-[15px] font-medium transition-all ${
+                  className={`flex items-center justify-between gap-3 rounded-lg border px-4 py-3.5 text-left text-[15px] font-medium transition-all ${
                     selected
-                      ? "border-blue bg-blue-tint text-navy"
-                      : "border-line bg-white text-ink hover:border-blue/40 hover:shadow-soft"
+                      ? "border-blue bg-cloud text-blue"
+                      : "border-line bg-white text-ink hover:border-blue/40"
                   }`}
                 >
                   {option.label}
@@ -516,7 +516,7 @@ function QuestionStep({
             type="button"
             onClick={onNext}
             disabled={selectedValues.length === 0}
-            className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep disabled:cursor-not-allowed disabled:opacity-40"
+            className="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep disabled:cursor-not-allowed disabled:opacity-40"
           >
             Next
             <ArrowRight className="h-4 w-4" aria-hidden />
@@ -542,7 +542,7 @@ function QuestionStep({
           <div className="mt-5 flex items-center gap-4">
             <button
               type="submit"
-              className="inline-flex items-center gap-2 rounded-2xl bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+              className="inline-flex items-center gap-2 rounded-lg bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
             >
               Next
               <ArrowRight className="h-4 w-4" aria-hidden />

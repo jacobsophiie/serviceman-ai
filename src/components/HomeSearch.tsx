@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { MapPin, Search } from "lucide-react";
 
 /**
- * The home page's job search: what you need done + where. Both go straight
- * into the chat, which skips its location question when a suburb is given.
+ * The job search used in every hero: what you need done + where. Both go
+ * straight into the chat, which skips its location question when a suburb
+ * is given. `tradeSlug`/`locationSlug` carry landing-page context through.
  */
 
 const examples = [
@@ -20,10 +21,23 @@ const examples = [
   "Clear a blocked drain",
 ];
 
-export function HomeSearch() {
+export function HomeSearch({
+  defaultJob = "",
+  defaultSuburb = "",
+  tradeSlug,
+  locationSlug,
+  tone = "dark",
+}: {
+  defaultJob?: string;
+  defaultSuburb?: string;
+  tradeSlug?: string;
+  locationSlug?: string;
+  /** "dark" sits on a photo/navy hero; "light" sits on a white page. */
+  tone?: "dark" | "light";
+}) {
   const router = useRouter();
-  const [job, setJob] = useState("");
-  const [suburb, setSuburb] = useState("");
+  const [job, setJob] = useState(defaultJob);
+  const [suburb, setSuburb] = useState(defaultSuburb);
   const [exampleIndex, setExampleIndex] = useState(0);
   const [error, setError] = useState("");
 
@@ -47,12 +61,18 @@ export function HomeSearch() {
         }
         const params = new URLSearchParams({ prompt });
         if (suburb.trim()) params.set("suburb", suburb.trim());
+        if (tradeSlug) params.set("trade", tradeSlug);
+        if (locationSlug) params.set("location", locationSlug);
         router.push(`/chat?${params}`);
       }}
-      className="rounded-lg bg-white p-2 shadow-xl shadow-navy/25"
+      className={
+        tone === "dark"
+          ? "rounded-lg bg-white p-2 shadow-xl shadow-navy/25"
+          : "rounded-lg border border-line bg-white p-2"
+      }
     >
       <div className="flex flex-col gap-2 md:flex-row">
-        <label className="flex flex-1 items-center gap-3 rounded-md border border-line px-4 focus-within:border-blue">
+        <label className="search-field flex flex-1 items-center gap-3 rounded-md border border-line px-4">
           <Search className="h-5 w-5 shrink-0 text-muted" aria-hidden />
           <span className="sr-only">What do you need done?</span>
           <input
@@ -67,7 +87,7 @@ export function HomeSearch() {
             className="h-12 w-full min-w-0 bg-transparent text-base text-ink placeholder:text-muted focus:outline-none"
           />
         </label>
-        <label className="flex items-center gap-3 rounded-md border border-line px-4 focus-within:border-blue md:w-60">
+        <label className="search-field flex items-center gap-3 rounded-md border border-line px-4 md:w-60">
           <MapPin className="h-5 w-5 shrink-0 text-muted" aria-hidden />
           <span className="sr-only">Suburb or postcode</span>
           <input

@@ -327,7 +327,7 @@ export function ConversationWorkspace(props: StartOptions) {
             type="button"
             onClick={() => setSummaryOpen(!summaryOpen)}
             aria-expanded={summaryOpen}
-            className="flex h-9 items-center gap-1.5 rounded-full border border-line px-3 text-xs font-semibold text-navy hover:border-blue hover:text-blue lg:hidden"
+            className="flex h-9 items-center gap-1.5 rounded-md border border-line px-3 text-xs font-semibold text-navy hover:border-blue hover:text-blue lg:hidden"
           >
             <ClipboardList className="h-3.5 w-3.5" aria-hidden />
             Job details
@@ -368,7 +368,7 @@ export function ConversationWorkspace(props: StartOptions) {
                 ) : (
                   <div
                     key={message.id}
-                    className={`rise-in max-w-[85%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed ${
+                    className={`rise-in max-w-[85%] rounded-lg px-4 py-3 text-[15px] leading-relaxed ${
                       message.role === "user"
                         ? "self-end rounded-br-md bg-blue text-white"
                         : "self-start rounded-bl-md border border-line bg-white text-ink"
@@ -393,7 +393,7 @@ export function ConversationWorkspace(props: StartOptions) {
               )}
 
               {typing && (
-                <div className="flex items-center gap-1.5 self-start rounded-2xl rounded-bl-md border border-line bg-white px-4 py-3.5">
+                <div className="flex items-center gap-1.5 self-start rounded-lg rounded-bl-md border border-line bg-white px-4 py-3.5">
                   <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted" />
                   <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted" />
                   <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted" />
@@ -534,7 +534,7 @@ export function ConversationWorkspace(props: StartOptions) {
               <button
                 type="submit"
                 aria-label="Send message"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue text-white transition-colors hover:bg-blue-deep disabled:opacity-40"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-blue text-white transition-colors hover:bg-blue-deep disabled:opacity-40"
                 disabled={!value.trim()}
               >
                 <Send className="h-4.5 w-4.5" aria-hidden />
@@ -554,11 +554,11 @@ export function ConversationWorkspace(props: StartOptions) {
           className="hidden w-80 shrink-0 flex-col gap-6 overflow-y-auto py-6 lg:flex"
           aria-label="Job request details"
         >
-          <div className="rounded-3xl border border-line bg-white p-5">
+          <div className="rounded-lg border border-line bg-white p-5">
             <JobProgress current={progressStep} />
           </div>
           {brief && (
-            <div className="rounded-3xl border border-line bg-white p-5">
+            <div className="rounded-lg border border-line bg-white p-5">
               <LiveJobSummary brief={brief} photoUrls={photoUrls} />
             </div>
           )}
@@ -578,7 +578,7 @@ export function ConversationWorkspace(props: StartOptions) {
             role="dialog"
             aria-modal="true"
             aria-label="Job request details"
-            className="absolute inset-x-0 bottom-0 max-h-[80dvh] overflow-y-auto rounded-t-3xl bg-white p-5 pb-8 shadow-lift"
+            className="absolute inset-x-0 bottom-0 max-h-[80dvh] overflow-y-auto rounded-t-3xl bg-white p-5 pb-8"
           >
             <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-line" aria-hidden />
             <JobProgress current={progressStep} />
@@ -586,7 +586,7 @@ export function ConversationWorkspace(props: StartOptions) {
             <button
               type="button"
               onClick={() => setSummaryOpen(false)}
-              className="mt-5 w-full rounded-full border border-line px-5 py-3 text-sm font-semibold text-navy"
+              className="mt-5 w-full rounded-md border border-line px-5 py-3 text-sm font-semibold text-navy"
             >
               Back to conversation
             </button>
@@ -615,7 +615,7 @@ export function ConversationWorkspace(props: StartOptions) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="exit-title"
-            className="relative w-full max-w-sm rounded-3xl bg-white p-6 shadow-lift"
+            className="relative w-full max-w-sm rounded-lg bg-white p-6"
           >
             <h2 id="exit-title" className="font-display text-lg font-bold text-navy">
               Leave this conversation?
@@ -629,14 +629,14 @@ export function ConversationWorkspace(props: StartOptions) {
                 type="button"
                 onClick={() => setExitConfirm(false)}
                 autoFocus
-                className="flex-1 rounded-full bg-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-deep"
+                className="flex-1 rounded-md bg-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-deep"
               >
                 Keep going
               </button>
               <button
                 type="button"
                 onClick={() => router.push("/")}
-                className="flex-1 rounded-full border border-line px-4 py-2.5 text-sm font-semibold text-muted hover:text-ink"
+                className="flex-1 rounded-md border border-line px-4 py-2.5 text-sm font-semibold text-muted hover:text-ink"
               >
                 Leave
               </button>

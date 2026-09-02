@@ -36,7 +36,7 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
-      <h1 className="font-display text-4xl font-extrabold tracking-tight text-navy">
+      <h1 className="font-display text-4xl font-bold tracking-tight text-navy">
         Privacy policy
       </h1>
       <p className="mt-4 text-base leading-relaxed text-muted">

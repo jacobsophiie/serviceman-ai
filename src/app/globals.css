@@ -52,6 +52,14 @@ body {
   border-radius: 4px;
 }
 
+/* Search fields show focus with their own border, not the global ring */
+.search-field:focus-within {
+  border-color: var(--color-navy);
+}
+.search-field input:focus-visible {
+  outline: none;
+}
+
 /* Hand-placed highlight behind a headline word */
 .word-highlight {
   position: relative;

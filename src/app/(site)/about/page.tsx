@@ -62,7 +62,7 @@ export default function AboutPage() {
     <>
       <section className="border-b border-line bg-white">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
-          <h1 className="font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-navy sm:text-5xl">
             Making it easier to explain what needs fixing
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
@@ -88,7 +88,7 @@ export default function AboutPage() {
           {struggles.map((struggle) => (
             <li
               key={struggle}
-              className="rounded-2xl border border-line bg-white px-5 py-4 text-[15px] leading-relaxed text-ink"
+              className="rounded-lg border border-line bg-white px-5 py-4 text-[15px] leading-relaxed text-ink"
             >
               {struggle}
             </li>
@@ -109,7 +109,7 @@ export default function AboutPage() {
             {principles.map((principle) => (
               <li
                 key={principle.title}
-                className="flex flex-col gap-3 rounded-2xl border border-line bg-cloud p-6"
+                className="flex flex-col gap-3 rounded-lg border border-line bg-cloud p-6"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-blue">
                   <principle.icon className="h-5 w-5" aria-hidden />

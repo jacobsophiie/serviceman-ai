@@ -37,7 +37,7 @@ export function SearchingSteps({
   }, [doneCount, steps.length, onFinished]);
 
   return (
-    <div className="rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8">
+    <div className="rounded-lg border border-line bg-white p-6 sm:p-8">
       <h2 className="font-display text-xl font-bold text-navy sm:text-2xl">
         {heading}
       </h2>
@@ -57,11 +57,11 @@ export function SearchingSteps({
               }`}
             >
               {state === "done" ? (
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-mint-tint text-success">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cloud text-blue">
                   <Check className="h-4 w-4" aria-hidden />
                 </span>
               ) : state === "active" ? (
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-tint text-blue">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-cloud text-blue">
                   <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
                 </span>
               ) : (

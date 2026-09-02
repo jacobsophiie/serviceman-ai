@@ -12,7 +12,7 @@ export default function ContactPage() {
     <>
       <section className="border-b border-line bg-white">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
-          <h1 className="font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-navy sm:text-5xl">
             Contact us
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
@@ -28,7 +28,7 @@ export default function ContactPage() {
 
       <section className="mx-auto grid max-w-4xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1fr_260px]">
         {sent ? (
-          <div className="rounded-3xl border border-line bg-white p-8 text-center">
+          <div className="rounded-lg border border-line bg-white p-8 text-center">
             <CheckCircle2 className="mx-auto h-10 w-10 text-success" aria-hidden />
             <h2 className="mt-4 font-display text-2xl font-bold text-navy">
               Message received
@@ -40,7 +40,7 @@ export default function ContactPage() {
             <button
               type="button"
               onClick={() => setSent(false)}
-              className="mt-6 rounded-full border border-line px-6 py-2.5 text-sm font-semibold text-navy hover:border-blue hover:text-blue"
+              className="mt-6 rounded-md border border-line px-6 py-2.5 text-sm font-semibold text-navy hover:border-blue hover:text-blue"
             >
               Send another message
             </button>
@@ -59,7 +59,7 @@ export default function ContactPage() {
               });
               setSent(true);
             }}
-            className="rounded-3xl border border-line bg-white p-6 sm:p-8"
+            className="rounded-lg border border-line bg-white p-6 sm:p-8"
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="flex flex-col gap-1.5">
@@ -119,7 +119,7 @@ export default function ContactPage() {
             </div>
             <button
               type="submit"
-              className="mt-6 rounded-full bg-blue px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+              className="mt-6 rounded-md bg-blue px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
             >
               Send message
             </button>
@@ -127,12 +127,12 @@ export default function ContactPage() {
         )}
 
         <aside className="flex flex-col gap-4">
-          <div className="rounded-2xl border border-line bg-white p-5">
+          <div className="rounded-lg border border-line bg-white p-5">
             <Mail className="h-5 w-5 text-blue" aria-hidden />
             <h2 className="mt-3 text-sm font-semibold text-navy">Email</h2>
             <p className="mt-1 text-sm text-muted">hello@serviceman.ai</p>
           </div>
-          <div className="rounded-2xl border border-line bg-white p-5">
+          <div className="rounded-lg border border-line bg-white p-5">
             <MessageCircle className="h-5 w-5 text-blue" aria-hidden />
             <h2 className="mt-3 text-sm font-semibold text-navy">
               Need a job done?

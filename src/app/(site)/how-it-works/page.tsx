@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Camera, Check, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { Camera, Check, MessageCircle, ShieldCheck } from "lucide-react";
 import { HowItWorks } from "@/components/HowItWorks";
 import { PhoneMock } from "@/components/PhoneMock";
 import { ChatPreview } from "@/components/ChatPreview";
@@ -48,7 +48,7 @@ function StepList({ steps }: { steps: string[] }) {
       {steps.map((step, index) => (
         <li key={step} className="flex items-start gap-3 text-[15px] text-ink">
           <span
-            className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue/10 text-xs font-bold text-blue"
+            className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-blue/10 text-xs font-bold text-blue"
             aria-hidden
           >
             {index + 1}
@@ -63,43 +63,22 @@ function StepList({ steps }: { steps: string[] }) {
 export default function HowItWorksPage() {
   return (
     <>
-      {/* Hero — headline and the three steps share one warm gradient band */}
-      <section className="relative overflow-hidden border-b border-line bg-gradient-to-b from-white via-blue-tint/40 to-blue-tint/70">
-        <div
-          className="absolute -left-24 top-16 h-64 w-64 rounded-full bg-sun/20 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="absolute -right-24 -top-20 h-72 w-72 rounded-full bg-blue/10 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="dot-grid absolute right-[6%] top-24 hidden h-24 w-36 opacity-60 lg:block"
-          aria-hidden
-        />
-        <div
-          className="dot-grid absolute left-[5%] top-[52%] hidden h-28 w-40 opacity-60 lg:block"
-          aria-hidden
-        />
+      <section className="border-b border-line bg-white">
+        <div className="mx-auto max-w-6xl px-4 pb-14 pt-16 sm:px-6 sm:pb-16 sm:pt-20">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-navy sm:text-5xl">
+            How Serviceman.ai works
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+            Tell us what needs doing, get quotes back from suitable local
+            tradies, and pick the one that suits you.
+          </p>
+        </div>
+      </section>
 
-        <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-sm font-semibold text-blue shadow-soft">
-              <Sparkles className="h-4 w-4" aria-hidden />
-              Three simple steps
-            </p>
-            <h1 className="mt-6 font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
-              How Serviceman.ai{" "}
-              <span className="word-highlight">works</span>
-            </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-              Tell us what needs doing, get quotes back from suitable
-              local tradies, and pick the one that suits you.
-            </p>
-          </div>
-          <div className="mt-12">
-            <HowItWorks heading="" withCta={false} />
-          </div>
+      {/* The three steps */}
+      <section className="border-b border-line bg-cloud">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <HowItWorks heading="" withCta={false} />
         </div>
       </section>
 
@@ -116,7 +95,7 @@ export default function HowItWorksPage() {
           <StepList steps={cameraSteps} />
           <Link
             href="/camera"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-blue px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+            className="mt-8 inline-flex items-center gap-2 rounded-md bg-blue px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
           >
             Try the camera assistant
           </Link>
@@ -141,7 +120,7 @@ export default function HowItWorksPage() {
             <StepList steps={chatSteps} />
             <Link
               href="/chat"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-blue px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+              className="mt-8 inline-flex items-center gap-2 rounded-md bg-blue px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
             >
               Start a chat
             </Link>
@@ -161,7 +140,7 @@ export default function HowItWorksPage() {
           </h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-3xl border border-line bg-white p-6">
+          <div className="rounded-lg border border-line bg-white p-6">
             <h3 className="font-display text-lg font-semibold text-navy">
               The AI agent
             </h3>
@@ -174,7 +153,7 @@ export default function HowItWorksPage() {
               ))}
             </ul>
           </div>
-          <div className="rounded-3xl border border-line bg-white p-6">
+          <div className="rounded-lg border border-line bg-white p-6">
             <h3 className="font-display text-lg font-semibold text-navy">
               It does not
             </h3>

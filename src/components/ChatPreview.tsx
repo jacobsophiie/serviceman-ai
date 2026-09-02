@@ -18,12 +18,12 @@ export function ChatPreview() {
   return (
     <div
       aria-label="Example conversation with the AI agent"
-      className="flex flex-col gap-3 rounded-3xl border border-line bg-white p-5 shadow-soft sm:p-6"
+      className="flex flex-col gap-3 rounded-lg border border-line bg-white p-5 sm:p-6"
     >
       {exchange.map((message, index) => (
         <div
           key={index}
-          className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+          className={`max-w-[85%] rounded-lg px-4 py-2.5 text-sm leading-relaxed ${
             message.role === "customer"
               ? "self-end rounded-br-md bg-blue text-white"
               : "self-start rounded-bl-md bg-cloud text-ink"
@@ -32,7 +32,7 @@ export function ChatPreview() {
           {message.text}
         </div>
       ))}
-      <div className="flex items-center gap-1.5 self-start rounded-2xl rounded-bl-md bg-cloud px-4 py-3">
+      <div className="flex items-center gap-1.5 self-start rounded-lg rounded-bl-md bg-cloud px-4 py-3">
         <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted" />
         <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted" />
         <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted" />

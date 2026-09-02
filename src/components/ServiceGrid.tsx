@@ -46,22 +46,22 @@ const iconFor: Record<string, LucideIcon> = {
 /* Each trade gets its own tile colour — one of the friendliest tricks the big
    marketplaces use, instead of a wall of identical blue icons. */
 const tileFor: Record<string, string> = {
-  plumber: "bg-blue-tint text-blue",
-  electrician: "bg-sun-tint text-sun-deep",
-  painter: "bg-coral-tint text-danger",
-  handyman: "bg-violet-tint text-blue-deep",
-  gardener: "bg-mint-tint text-success",
-  carpenter: "bg-sun-tint text-sun-deep",
-  builder: "bg-blue-tint text-navy",
-  roofer: "bg-coral-tint text-danger",
-  tiler: "bg-teal-tint text-blue-deep",
-  concreter: "bg-violet-tint text-navy",
-  landscaper: "bg-mint-tint text-success",
-  cleaner: "bg-teal-tint text-blue",
-  locksmith: "bg-violet-tint text-blue-deep",
-  "pest-control": "bg-mint-tint text-success",
-  "air-conditioning": "bg-teal-tint text-blue",
-  removalist: "bg-sun-tint text-sun-deep",
+  plumber: "bg-cloud text-blue",
+  electrician: "bg-cloud text-blue",
+  painter: "bg-cloud text-blue",
+  handyman: "bg-cloud text-blue-deep",
+  gardener: "bg-cloud text-blue",
+  carpenter: "bg-cloud text-blue",
+  builder: "bg-cloud text-blue",
+  roofer: "bg-cloud text-blue",
+  tiler: "bg-cloud text-blue-deep",
+  concreter: "bg-cloud text-blue",
+  landscaper: "bg-cloud text-blue",
+  cleaner: "bg-cloud text-blue",
+  locksmith: "bg-cloud text-blue-deep",
+  "pest-control": "bg-cloud text-blue",
+  "air-conditioning": "bg-cloud text-blue",
+  removalist: "bg-cloud text-blue",
 };
 
 const homePageSlugs = [
@@ -96,7 +96,7 @@ export function ServiceGrid({ all = false }: { all?: boolean }) {
           <li key={trade.slug}>
             <Link
               href={`/trades/${trade.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white transition-all hover:-translate-y-0.5 hover:border-blue/40 hover:shadow-soft"
+              className="group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white transition-all hover:-translate-y-0.5 hover:border-blue/40"
             >
               <span className="relative block aspect-[4/3] w-full overflow-hidden bg-cloud">
                 <Image
@@ -107,7 +107,7 @@ export function ServiceGrid({ all = false }: { all?: boolean }) {
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                 />
                 <span
-                  className={`absolute left-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-lg shadow-soft backdrop-blur ${
+                  className={`absolute left-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-lg backdrop-blur ${
                     tileFor[trade.slug] ?? "bg-white/90 text-blue"
                   }`}
                   aria-hidden

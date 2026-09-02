@@ -13,7 +13,7 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
   const baseId = useId();
 
   return (
-    <div className="divide-y divide-line rounded-2xl border border-line bg-white">
+    <div className="divide-y divide-line rounded-lg border border-line bg-white">
       {items.map((item, index) => {
         const open = openIndex === index;
         const buttonId = `${baseId}-q-${index}`;

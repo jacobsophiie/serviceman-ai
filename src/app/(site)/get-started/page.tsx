@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JobStart } from "@/components/JobStart";
+import { HomeSearch } from "@/components/HomeSearch";
 import { HowItWorks } from "@/components/HowItWorks";
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default async function GetStartedPage({
     <>
       <section className="border-b border-line bg-white">
         <div className="mx-auto flex max-w-4xl flex-col items-center px-4 py-16 text-center sm:px-6 sm:py-20">
-          <h1 className="max-w-2xl font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
+          <h1 className="max-w-2xl font-display text-4xl font-bold tracking-tight text-navy sm:text-5xl">
             What needs doing?
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
@@ -30,7 +30,7 @@ export default async function GetStartedPage({
             our job.
           </p>
           <div className="mt-9 flex w-full justify-center">
-            <JobStart defaultValue={prefill} />
+            <HomeSearch tone="light" defaultJob={prefill} />
           </div>
         </div>
       </section>

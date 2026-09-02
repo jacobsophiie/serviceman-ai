@@ -21,13 +21,13 @@ export default function NotFound() {
           <div className="mt-8 flex flex-col justify-center gap-2.5 sm:flex-row">
             <Link
               href="/get-started"
-              className="rounded-full bg-blue px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+              className="rounded-md bg-blue px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
             >
               Describe your job
             </Link>
             <Link
               href="/"
-              className="rounded-full border border-line px-6 py-3 text-base font-semibold text-navy transition-colors hover:border-blue hover:text-blue"
+              className="rounded-md border border-line px-6 py-3 text-base font-semibold text-navy transition-colors hover:border-blue hover:text-blue"
             >
               Return home
             </Link>

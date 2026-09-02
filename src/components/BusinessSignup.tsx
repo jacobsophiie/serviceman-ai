@@ -49,7 +49,7 @@ const emptyFields: Fields = {
 };
 
 const inputClass =
-  "w-full rounded-2xl border border-line bg-cloud px-4 py-3 text-base text-ink placeholder:text-muted focus:border-blue focus:outline-none";
+  "w-full rounded-lg border border-line bg-cloud px-4 py-3 text-base text-ink placeholder:text-muted focus:border-blue focus:outline-none";
 
 const errorClass = "border-danger bg-danger/5";
 
@@ -147,8 +147,8 @@ export function BusinessSignup() {
       .map((t) => t.category);
 
     return (
-      <div className="rounded-3xl border border-line bg-white p-8 shadow-soft">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-mint-tint text-success">
+      <div className="rounded-lg border border-line bg-white p-8">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-cloud text-blue">
           <BadgeCheck className="h-7 w-7" aria-hidden />
         </span>
         <h3 className="mt-5 font-display text-2xl font-bold text-navy">
@@ -209,7 +209,7 @@ export function BusinessSignup() {
         });
         setSubmitted(true);
       }}
-      className="rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8"
+      className="rounded-lg border border-line bg-white p-6 sm:p-8"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
@@ -311,7 +311,7 @@ export function BusinessSignup() {
                 aria-pressed={selected}
                 className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
                   selected
-                    ? "border-blue bg-blue-tint text-blue"
+                    ? "border-blue bg-cloud text-blue"
                     : "border-line bg-white text-ink hover:border-blue/40"
                 }`}
               >
@@ -406,7 +406,7 @@ export function BusinessSignup() {
 
       <button
         type="submit"
-        className="mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep sm:w-auto"
+        className="mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep sm:w-auto"
       >
         Register your business
         <ArrowRight className="h-4 w-4" aria-hidden />

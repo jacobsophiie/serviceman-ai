@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, MapPin } from "lucide-react";
 import { inPlace, majorLocations } from "@/lib/data/locations";
-import { JobStart } from "@/components/JobStart";
+import { LandingHero } from "@/components/LandingHero";
 import { FinalCTA } from "@/components/FinalCTA";
 import { heroImage } from "@/lib/images";
 
@@ -16,37 +15,12 @@ export const metadata: Metadata = {
 export default function LocationsIndexPage() {
   return (
     <>
-      <section className="border-b border-line bg-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-14 pt-16 sm:px-6 sm:pb-16 sm:pt-20 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="flex flex-col">
-            <p className="flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-blue">
-              <MapPin className="h-4 w-4" aria-hidden />
-              Australia wide
-            </p>
-            <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-navy sm:text-5xl">
-              Local trades, organised anywhere
-            </h1>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-              Wherever the job is, the process is the same: tell us about the
-              problem, and we&rsquo;ll prepare your request for suitable trades
-              businesses that service your area.
-            </p>
-            <div className="mt-8">
-              <JobStart />
-            </div>
-          </div>
-          <div className="relative hidden min-h-[26rem] overflow-hidden rounded-3xl shadow-lift lg:block">
-            <Image
-              src={heroImage.src}
-              alt={heroImage.alt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </section>
+      <LandingHero
+        image={heroImage}
+        eyebrow="Australia wide"
+        title="Local tradies, wherever you are"
+        copy="Tell us what needs doing and where. We'll match you with licensed businesses servicing your suburb, who come back to you with quotes."
+      />
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -54,7 +28,7 @@ export default function LocationsIndexPage() {
             <li key={location.slug}>
               <Link
                 href={`/locations/${location.slug}`}
-                className="group flex h-full flex-col gap-2 rounded-2xl border border-line bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue/40 hover:shadow-soft"
+                className="group flex h-full flex-col gap-2 rounded-lg border border-line bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue/40"
               >
                 <span className="flex items-center gap-2 font-display text-lg font-semibold text-navy">
                   <MapPin className="h-4 w-4 text-blue" aria-hidden />

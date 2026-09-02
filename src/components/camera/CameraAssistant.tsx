@@ -370,7 +370,7 @@ export function CameraAssistant({
         </header>
 
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-5 py-12">
-          <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue/10 text-blue">
+          <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-blue/10 text-blue">
             <Camera className="h-7 w-7" aria-hidden />
           </span>
           <h1 className="mt-6 font-display text-3xl font-bold text-navy">
@@ -385,7 +385,7 @@ export function CameraAssistant({
             <button
               type="button"
               onClick={() => setPhase("permission")}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-blue px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-blue px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
             >
               <Camera className="h-5 w-5" aria-hidden />
               Open camera
@@ -429,7 +429,7 @@ export function CameraAssistant({
               role="dialog"
               aria-modal="true"
               aria-labelledby="cam-permission-title"
-              className="relative w-full max-w-sm rounded-3xl bg-white p-6 shadow-lift"
+              className="relative w-full max-w-sm rounded-lg bg-white p-6"
             >
               <h2
                 id="cam-permission-title"
@@ -448,14 +448,14 @@ export function CameraAssistant({
                   type="button"
                   onClick={() => void beginLive()}
                   autoFocus
-                  className="flex-1 rounded-full bg-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-deep"
+                  className="flex-1 rounded-md bg-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-deep"
                 >
                   Allow
                 </button>
                 <button
                   type="button"
                   onClick={() => setPhase("launch")}
-                  className="flex-1 rounded-full border border-line px-4 py-2.5 text-sm font-semibold text-muted hover:text-ink"
+                  className="flex-1 rounded-md border border-line px-4 py-2.5 text-sm font-semibold text-muted hover:text-ink"
                 >
                   Not now
                 </button>
@@ -471,7 +471,7 @@ export function CameraAssistant({
 
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center bg-camera lg:bg-navy lg:py-8">
-      <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-camera lg:h-[780px] lg:max-w-[400px] lg:rounded-[2rem] lg:border-8 lg:border-black/60 lg:shadow-lift">
+      <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-camera lg:h-[780px] lg:max-w-[400px] lg:rounded-[2rem] lg:border-8 lg:border-black/60 lg:">
         {/* Viewfinder: live camera stream, with a simulated fallback */}
         <video
           ref={videoRef}
@@ -576,7 +576,7 @@ export function CameraAssistant({
           {caption && (
             <div
               aria-live="polite"
-              className={`rounded-2xl px-4 py-3.5 backdrop-blur ${
+              className={`rounded-lg px-4 py-3.5 backdrop-blur ${
                 captionSafety
                   ? "border border-danger/60 bg-danger/25"
                   : "bg-black/55"
@@ -620,7 +620,7 @@ export function CameraAssistant({
           )}
 
           {finished && (
-            <div className="rounded-2xl bg-white p-4 shadow-lift">
+            <div className="rounded-lg bg-white p-4">
               <p className="text-sm font-semibold text-navy">
                 {shots.length > 0
                   ? `${shots.length} ${shots.length === 1 ? "image" : "images"} added to your job brief.`
@@ -633,7 +633,7 @@ export function CameraAssistant({
               <button
                 type="button"
                 onClick={continueToChat}
-                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-deep"
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue px-5 py-3 text-sm font-semibold text-white hover:bg-blue-deep"
               >
                 Continue to job details
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -706,7 +706,7 @@ export function CameraAssistant({
               <button
                 type="button"
                 onClick={() => setTranscriptOpen(false)}
-                className="mt-5 w-full rounded-full border border-line px-5 py-3 text-sm font-semibold text-navy"
+                className="mt-5 w-full rounded-md border border-line px-5 py-3 text-sm font-semibold text-navy"
               >
                 Back to camera
               </button>

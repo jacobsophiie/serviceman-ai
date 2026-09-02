@@ -96,7 +96,7 @@ export function CameraCaptureModal({
           autoPlay
           playsInline
           muted
-          className="max-h-full w-full rounded-2xl object-contain"
+          className="max-h-full w-full rounded-lg object-contain"
         />
       </div>
 

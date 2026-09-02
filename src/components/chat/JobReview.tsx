@@ -78,7 +78,7 @@ function EditableRow({
                 <button
                   type="button"
                   onClick={save}
-                  className="rounded-full bg-blue px-4 py-1.5 text-xs font-semibold text-white hover:bg-blue-deep"
+                  className="rounded-md bg-blue px-4 py-1.5 text-xs font-semibold text-white hover:bg-blue-deep"
                 >
                   Save
                 </button>
@@ -88,7 +88,7 @@ function EditableRow({
                     setDraft(value ?? "");
                     setEditing(false);
                   }}
-                  className="rounded-full border border-line px-4 py-1.5 text-xs font-semibold text-muted hover:text-ink"
+                  className="rounded-md border border-line px-4 py-1.5 text-xs font-semibold text-muted hover:text-ink"
                 >
                   Cancel
                 </button>
@@ -140,13 +140,13 @@ export function JobReview({
   return (
     <section
       aria-label="Job summary for review"
-      className="rise-in rounded-3xl border border-line bg-white p-5 shadow-soft sm:p-6"
+      className="rise-in rounded-lg border border-line bg-white p-5 sm:p-6"
     >
       <h2 className="font-display text-xl font-bold text-navy">
         Here&rsquo;s the job we&rsquo;ll send to local tradies
       </h2>
 
-      <div className="mt-4 rounded-2xl bg-cloud p-4">
+      <div className="mt-4 rounded-lg bg-cloud p-4">
         <EditableRow
           label="Job title"
           value={brief.title}
@@ -194,7 +194,7 @@ export function JobReview({
         )}
       </div>
 
-      <div className="mt-4 rounded-2xl bg-cloud p-4">
+      <div className="mt-4 rounded-lg bg-cloud p-4">
         <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">
           Your contact details
         </h3>
@@ -250,7 +250,7 @@ export function JobReview({
         <button
           type="button"
           onClick={onSubmit}
-          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
         >
           <Send className="h-4 w-4" aria-hidden />
           Send my job to local tradies
@@ -258,7 +258,7 @@ export function JobReview({
         <button
           type="button"
           onClick={onAddMore}
-          className="rounded-full border border-line px-6 py-3.5 text-base font-semibold text-navy transition-colors hover:border-blue hover:text-blue"
+          className="rounded-md border border-line px-6 py-3.5 text-base font-semibold text-navy transition-colors hover:border-blue hover:text-blue"
         >
           Add more information
         </button>

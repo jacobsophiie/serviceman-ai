@@ -107,7 +107,7 @@ export function SubmissionConfirmation({
         </p>
       </div>
 
-      <dl className="mt-8 divide-y divide-line rounded-3xl border border-line bg-white p-5 shadow-soft sm:p-6">
+      <dl className="mt-8 divide-y divide-line rounded-lg border border-line bg-white p-5 sm:p-6">
         {[
           ["Job title", brief.title ?? "New job request"],
           ["Trade category", tradeName],
@@ -132,13 +132,13 @@ export function SubmissionConfirmation({
         <button
           type="button"
           onClick={onRestart}
-          className="flex-1 rounded-full bg-blue px-6 py-3.5 text-center text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+          className="flex-1 rounded-md bg-blue px-6 py-3.5 text-center text-base font-semibold text-white transition-colors hover:bg-blue-deep"
         >
           Submit another job
         </button>
         <Link
           href="/"
-          className="flex-1 rounded-full border border-line px-6 py-3.5 text-center text-base font-semibold text-navy transition-colors hover:border-blue hover:text-blue"
+          className="flex-1 rounded-md border border-line px-6 py-3.5 text-center text-base font-semibold text-navy transition-colors hover:border-blue hover:text-blue"
         >
           Return home
         </Link>

@@ -71,7 +71,7 @@ export function PhoneMock() {
     <div
       role="img"
       aria-label="Preview of the serviceman.ai camera assistant guiding a customer through a leak under a kitchen sink"
-      className="mx-auto w-full max-w-[300px] rounded-[2.5rem] border-[10px] border-navy bg-camera shadow-lift"
+      className="mx-auto w-full max-w-[300px] rounded-[2.5rem] border-[10px] border-navy bg-camera"
     >
       <div
         className="relative flex aspect-[9/18] flex-col overflow-hidden rounded-[1.9rem]"
@@ -133,7 +133,7 @@ export function PhoneMock() {
 
         {/* AI caption */}
         <div className="relative z-10 mt-auto px-3">
-          <div className="rounded-2xl bg-black/60 px-3.5 py-3 backdrop-blur">
+          <div className="rounded-lg bg-black/60 px-3.5 py-3 backdrop-blur">
             <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wide text-white/50">
               AI agent
               <span className="soft-pulse h-1 w-1 rounded-full bg-success" />

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { getLocation, inPlace, locations, placeName } from "@/lib/data/locations";
 import { getTrade } from "@/lib/data/trades";
-import { heroImage } from "@/lib/images";
+import { cityImageFor } from "@/lib/data/city-images";
 import { Testimonials } from "@/components/Testimonials";
 import { HowItWorks } from "@/components/HowItWorks";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -46,7 +46,7 @@ export default async function LocationPage({
   return (
     <>
       <LandingHero
-        image={heroImage}
+        image={cityImageFor(location)}
         eyebrow={`${location.name}, ${location.stateAbbr} · ${location.postcodeRange}`}
         title={`Find local tradies ${inLoc}`}
         copy="Tell us what needs doing. We'll match you with licensed businesses servicing your suburb, who come back to you with quotes."

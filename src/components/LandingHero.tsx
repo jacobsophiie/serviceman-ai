@@ -17,6 +17,7 @@ export function LandingHero({
   tradeSlug,
   locationSlug,
   tradesLabel,
+  imageClassName = "",
 }: {
   image: { src: string; alt: string };
   eyebrow?: string;
@@ -27,6 +28,8 @@ export function LandingHero({
   tradeSlug?: string;
   locationSlug?: string;
   tradesLabel?: string;
+  /** Extra classes for the photo, e.g. an object-position. */
+  imageClassName?: string;
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-navy">
@@ -36,7 +39,7 @@ export function LandingHero({
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className={`object-cover ${imageClassName}`}
       />
       <div className="absolute inset-0 bg-navy/75 lg:hidden" aria-hidden />
       <div

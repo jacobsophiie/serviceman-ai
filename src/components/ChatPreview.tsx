@@ -1,19 +1,16 @@
 const exchange = [
-  { role: "customer", text: "I need a painter in Brisbane." },
+  { role: "customer", text: "Fix a leaking kitchen tap" },
+  { role: "ai", text: "Where is the job located?" },
+  { role: "customer", text: "Dromana" },
   {
     role: "ai",
-    text: "Is the painting for the inside or outside of the property?",
+    text: "Thanks. Is the water leaking continuously, or only when the tap is running?",
   },
-  { role: "customer", text: "Inside." },
-  { role: "ai", text: "Which rooms need painting?" },
-  { role: "customer", text: "The living room, hallway and two bedrooms." },
-  {
-    role: "ai",
-    text: "Are you looking to repaint the same colour or change the colour?",
-  },
+  { role: "customer", text: "Continuously" },
+  { role: "ai", text: "Can you see where the water is coming from?" },
 ] as const;
 
-/** Static example conversation shown on the home page chat section. */
+/** Static example conversation — the same job the brief and quotes examples show. */
 export function ChatPreview() {
   return (
     <div

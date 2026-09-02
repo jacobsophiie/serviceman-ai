@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import {
   ArrowRight,
@@ -12,7 +11,7 @@ import {
 import { heroImage } from "@/lib/images";
 import { trades } from "@/lib/data/trades";
 import { inPlace, majorLocations } from "@/lib/data/locations";
-import { HomeSearch } from "@/components/HomeSearch";
+import { LandingHero } from "@/components/LandingHero";
 import { ServiceTiles } from "@/components/ServiceTiles";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Testimonials } from "@/components/Testimonials";
@@ -61,42 +60,16 @@ const briefChecks = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero — photo, one headline, one job */}
-      <section className="relative isolate overflow-hidden bg-navy">
-        <Image
-          src={heroImage.src}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        {/* Uniform overlay on phones (text spans the width); a left-to-right fade on desktop */}
-        <div className="absolute inset-0 bg-navy/75 lg:hidden" aria-hidden />
-        <div
-          className="absolute inset-0 hidden bg-gradient-to-r from-navy/90 via-navy/70 to-navy/30 lg:block"
-          aria-hidden
-        />
-        <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24">
-          <div className="max-w-2xl">
-            <h1 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Tell us the job.
-              <br className="hidden sm:block" /> Our AI agent finds the best local trades.
-            </h1>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/85">
-              Describe what needs doing and your AI agent gets to work: it asks
-              the right questions, writes the brief, and tracks down licensed
-              trades businesses in your area to quote. Free, no obligation.
-            </p>
-          </div>
-          <div className="mt-8 max-w-3xl">
-            <HomeSearch />
-          </div>
-          <p className="mt-4 text-sm text-white/70">
-            Free to post · Takes about 2 minutes · No obligation
-          </p>
-        </div>
-      </section>
+      <LandingHero
+        image={heroImage}
+        title={
+          <>
+            Tell us the job.
+            <br className="hidden sm:block" /> Our AI agent finds the best local&nbsp;trades.
+          </>
+        }
+        copy="Describe what needs doing and your AI agent gets to work: it asks the right questions, writes the brief, and tracks down licensed trades businesses in your area to quote. Free, no obligation."
+      />
 
       {/* Popular services */}
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">

@@ -67,12 +67,12 @@ export function HomeSearch({
       }}
       className={
         tone === "dark"
-          ? "rounded-lg bg-white p-2 shadow-xl shadow-navy/25"
-          : "rounded-lg border border-line bg-white p-2"
+          ? "rounded-xl bg-white p-2.5 shadow-2xl shadow-navy/30"
+          : "rounded-xl border border-line bg-white p-2.5"
       }
     >
-      <div className="flex flex-col gap-2 md:flex-row">
-        <label className="search-field flex flex-1 items-center gap-3 rounded-md border border-line px-4">
+      <div className="flex flex-col gap-2.5 md:flex-row md:items-stretch">
+        <label className="search-field flex flex-1 items-center gap-3 rounded-lg border border-line px-4">
           <Search className="h-5 w-5 shrink-0 text-muted" aria-hidden />
           <span className="sr-only">What do you need done?</span>
           <input
@@ -84,10 +84,16 @@ export function HomeSearch({
             }}
             placeholder={`e.g. ${examples[exampleIndex]}`}
             autoComplete="off"
-            className="h-12 w-full min-w-0 bg-transparent text-base text-ink placeholder:text-muted focus:outline-none"
+            className="h-14 w-full min-w-0 bg-transparent text-base text-ink placeholder:text-muted focus:outline-none sm:text-[17px]"
           />
         </label>
-        <label className="search-field flex items-center gap-3 rounded-md border border-line px-4 md:w-60">
+        <span
+          className="hidden shrink-0 items-center px-1 text-base font-medium text-muted md:flex"
+          aria-hidden
+        >
+          in
+        </span>
+        <label className="search-field flex items-center gap-3 rounded-lg border border-line px-4 md:w-64">
           <MapPin className="h-5 w-5 shrink-0 text-muted" aria-hidden />
           <span className="sr-only">Suburb or postcode</span>
           <input
@@ -96,12 +102,12 @@ export function HomeSearch({
             onChange={(event) => setSuburb(event.target.value)}
             placeholder="Suburb or postcode"
             autoComplete="postal-code"
-            className="h-12 w-full min-w-0 bg-transparent text-base text-ink placeholder:text-muted focus:outline-none"
+            className="h-14 w-full min-w-0 bg-transparent text-base text-ink placeholder:text-muted focus:outline-none sm:text-[17px]"
           />
         </label>
         <button
           type="submit"
-          className="h-12 shrink-0 rounded-md bg-blue px-6 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
+          className="h-14 shrink-0 rounded-lg bg-blue px-7 text-base font-semibold text-white transition-colors hover:bg-blue-deep sm:text-[17px]"
         >
           Get free quotes
         </button>

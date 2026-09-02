@@ -20,13 +20,13 @@ import { FinalCTA } from "@/components/FinalCTA";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "serviceman.ai makes organising trade services simpler. Tell us what you need and we'll turn it into a clear job brief for licensed local tradies.",
+    "serviceman.ai makes organising trade services simpler. Tell us what you need and we'll turn it into a clear job brief for licensed local trades.",
 };
 
 const struggles = [
   "Not knowing which trade you actually need",
   "Struggling to explain the problem clearly",
-  "Not knowing which details matter to a tradie",
+  "Not knowing which details matter to a trades business",
   "Ringing around and leaving voicemails",
   "Repeating the same story to every business",
   "Getting quotes that don't match the job",
@@ -35,7 +35,7 @@ const struggles = [
 const audiences = [
   {
     title: "For homeowners and renters",
-    copy: "Describe the job once, in plain English. We ask the right questions, write the brief and bring licensed local tradies back to you with quotes.",
+    copy: "Describe the job once, in plain English. We ask the right questions, write the brief and bring licensed local trades back to you with quotes.",
     href: "/get-started",
     label: "Get free quotes",
   },
@@ -47,7 +47,7 @@ const audiences = [
   },
   {
     title: "AI that asks, not diagnoses",
-    copy: "Our AI does the admin: the questions, the brief, the matching. Diagnosis and advice stay with the licensed tradie who turns up.",
+    copy: "Our AI does the admin: the questions, the brief, the matching. Diagnosis and advice stay with the licensed tradesperson who turns up.",
     href: "/how-it-works",
     label: "See how it works",
   },
@@ -57,7 +57,7 @@ const principles = [
   {
     icon: Sparkles,
     title: "Make it simple",
-    copy: "Organising a tradie should take minutes, not a weekend of phone calls.",
+    copy: "Organising a trade should take minutes, not a weekend of phone calls.",
   },
   {
     icon: Lightbulb,
@@ -71,7 +71,7 @@ const principles = [
   },
   {
     icon: MessageSquareText,
-    title: "Help tradies understand the job",
+    title: "Help trades understand the job",
     copy: "Clear briefs mean accurate quotes and fewer wasted site visits.",
   },
   {
@@ -97,7 +97,7 @@ export default function AboutPage() {
         imageClassName="-scale-x-100 object-[40%_center]"
         eyebrow="About serviceman.ai"
         title="Making it easier to explain what needs fixing"
-        copy="Most people only organise a tradie a few times a year — and it shows. We built serviceman.ai so you can describe the problem once, in your own words, and let the AI turn it into a job brief that licensed local tradies can quote from."
+        copy="Most people only organise a trade a few times a year — and it shows. We built serviceman.ai so you can describe the problem once, in your own words, and let the AI turn it into a job brief that licensed local trades can quote from."
         showSearch={false}
         cta={{ label: "See how it works", href: "/how-it-works" }}
       />
@@ -109,7 +109,7 @@ export default function AboutPage() {
             Sound familiar?
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted">
-            Getting a tradie shouldn&rsquo;t be the hardest part of getting
+            Getting a trade in shouldn&rsquo;t be the hardest part of getting
             something fixed. But when you only do it a few times a year, the
             same things trip everyone up.
           </p>
@@ -200,7 +200,7 @@ export default function AboutPage() {
               Built for Australian homes and trades
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              Licensing, safety rules and the way tradies quote are different
+              Licensing, safety rules and the way trades quote are different
               here, so serviceman.ai is built around them: Australian trade
               categories, licensed businesses only, and suburb-level matching
               across our metro areas.

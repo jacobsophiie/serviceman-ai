@@ -14,11 +14,11 @@ import { productFaqs } from "@/lib/data/faqs";
 export const metadata: Metadata = {
   title: "How it works",
   description:
-    "Tell us what needs doing, let our AI write the brief and find licensed local tradies, then pick from the quotes that come back. Free, no obligation.",
+    "Tell us what needs doing, let our AI write the brief and find licensed local trades, then pick from the quotes that come back. Free, no obligation.",
 };
 
 const agentDoes = [
-  "Asks the questions a tradie would ask for your kind of job",
+  "Asks the questions a tradesperson would ask for your kind of job",
   "Collects the details and photos into a clear brief",
   "Sends it only to licensed businesses servicing your suburb",
 ];
@@ -64,7 +64,7 @@ export default function HowItWorksPage() {
         imageClassName="object-[70%_center]"
         eyebrow="How it works"
         title="How Serviceman.ai works"
-        copy="Tell us what needs doing, let our AI find licensed local tradies, and pick from the quotes that come back. Here's exactly what happens, step by step."
+        copy="Tell us what needs doing, let our AI find licensed local trades, and pick from the quotes that come back. Here's exactly what happens, step by step."
       />
 
       {/* Step 1 — the conversation */}
@@ -97,11 +97,11 @@ export default function HowItWorksPage() {
           <div className="lg:order-2">
             <StepNumber n={2} />
             <h2 className="mt-5 font-display text-2xl font-bold tracking-tight text-navy sm:text-3xl">
-              Our AI writes the brief and finds the right tradies
+              Our AI writes the brief and finds the right trades
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
               Your answers and photos become a clear job brief — the kind a
-              tradie can quote from without ringing you back with questions.
+              trades business can quote from without ringing you back with questions.
               It goes only to licensed businesses that service your suburb and
               do that kind of work.
             </p>
@@ -136,7 +136,7 @@ export default function HowItWorksPage() {
             items={[
               "Multiple quotes for the same brief, so they're easy to compare",
               "Licensed and insured businesses only",
-              "You deal directly with the tradie you choose",
+              "You deal directly with the trades business you choose",
             ]}
           />
           <Link
@@ -163,7 +163,7 @@ export default function HowItWorksPage() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
               If it&rsquo;s easier to point than explain, open the camera
-              assistant. It guides you to the angles a tradie wants to see,
+              assistant. It guides you to the angles a tradesperson wants to see,
               captures the photos, and adds them to your brief.
             </p>
             <Link

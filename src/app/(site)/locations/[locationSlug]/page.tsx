@@ -23,8 +23,8 @@ export async function generateMetadata({
   const location = getLocation(locationSlug);
   if (!location) return {};
   return {
-    title: `Find local tradies ${inPlace(location)}`,
-    description: `Find local tradies ${inPlace(location)}, ${location.stateAbbr}. Tell the serviceman.ai job assistant what needs doing and we'll prepare your request for suitable local businesses.`,
+    title: `Find local trades ${inPlace(location)}`,
+    description: `Find local trades ${inPlace(location)}, ${location.stateAbbr}. Tell the serviceman.ai job assistant what needs doing and we'll prepare your request for suitable local businesses.`,
   };
 }
 
@@ -48,7 +48,7 @@ export default async function LocationPage({
       <LandingHero
         image={cityImageFor(location)}
         eyebrow={`${location.name}, ${location.stateAbbr} · ${location.postcodeRange}`}
-        title={`Let our AI agent find the best tradies ${inLoc}`}
+        title={`Let our AI agent find the best trades ${inLoc}`}
         copy="Tell us the job and your AI agent finds licensed trades businesses servicing your suburb — then brings their quotes back to you."
         defaultSuburb={location.name}
         locationSlug={location.slug}
@@ -112,7 +112,7 @@ export default async function LocationPage({
 
       <FinalCTA
         heading={`Got a job ${inLoc}?`}
-        chatPrompt={`I need a tradie ${inLoc}`}
+        chatPrompt={`I need a trades business ${inLoc}`}
       />
     </>
   );

@@ -648,7 +648,7 @@ function askPhoto(state: ConversationState, lead?: string): EngineResult {
   return {
     messages: [
       {
-        text: `${lead ? `${lead} ` : ""}Would you like to show me using your camera, or upload a photo? Photos help tradies quote more accurately — but you can skip this step.`,
+        text: `${lead ? `${lead} ` : ""}Would you like to show me using your camera, or upload a photo? Photos help trades quote more accurately — but you can skip this step.`,
       },
     ],
     actions: [
@@ -1006,7 +1006,7 @@ export function advance(
       return withPrefix({
         messages: [
           {
-            text: `What's the best mobile number for tradies to ${brief.contactMethod === "SMS" ? "text" : "call"} you on?`,
+            text: `What's the best mobile number for trades to ${brief.contactMethod === "SMS" ? "text" : "call"} you on?`,
           },
         ],
         inputHint: "e.g. 0400 000 000",
@@ -1034,7 +1034,7 @@ export function advance(
       return withPrefix({
         messages: [
           {
-            text: "That's everything I need. Here's the job we'll send to local tradies — take a look and edit anything that isn't right.",
+            text: "That's everything I need. Here's the job we'll send to local trades — take a look and edit anything that isn't right.",
           },
         ],
         state: { ...state, brief, stage: "review" },
@@ -1061,7 +1061,7 @@ export function advance(
       return withPrefix({
         messages: [
           {
-            text: "That's everything I need. Here's the job we'll send to local tradies — take a look and edit anything that isn't right.",
+            text: "That's everything I need. Here's the job we'll send to local trades — take a look and edit anything that isn't right.",
           },
         ],
         state: { ...state, brief, stage: "review" },
@@ -1093,7 +1093,7 @@ export function photoAdded(
       {
         text: `Thanks — I've added ${count === 1 ? "the" : count} ${plural} to your job request. ${
           brief.photos > 1 ? "They'll help" : "It'll help"
-        } tradies understand the job before they quote.`,
+        } trades understand the job before they quote.`,
       },
       { text: "How soon do you need it done?" },
     ],

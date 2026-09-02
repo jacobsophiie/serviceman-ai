@@ -63,7 +63,7 @@ const faqs = [
   {
     question: "What happens after I submit?",
     answer:
-      "Your request is checked and sent to suitable local businesses. Interested tradies then contact you using your preferred method to ask any final questions and provide quotes.",
+      "Your request is checked and sent to suitable local businesses. Interested trades then contact you using your preferred method to ask any final questions and provide quotes.",
   },
   {
     question: "Can I submit an urgent job?",

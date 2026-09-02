@@ -21,7 +21,7 @@ const cities: CitySeed[] = [
     stateAbbr: "VIC",
     postcodeRange: "3000–3207",
     intro:
-      "From Victorian terraces in the inner north to new builds in the growth corridors, Melbourne homes keep local tradies busy year round.",
+      "From Victorian terraces in the inner north to new builds in the growth corridors, Melbourne homes keep local trades busy year round.",
     popularServices: [
       "plumber",
       "electrician",
@@ -134,7 +134,7 @@ const cities: CitySeed[] = [
     stateAbbr: "SA",
     postcodeRange: "5000–5174",
     intro:
-      "Stone cottages, bungalows and new estates — Adelaide's character homes need tradies who understand older construction as well as modern builds.",
+      "Stone cottages, bungalows and new estates — Adelaide's character homes need trades who understand older construction as well as modern builds.",
     popularServices: [
       "plumber",
       "electrician",

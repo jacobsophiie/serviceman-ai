@@ -5,7 +5,7 @@ export const productFaqs: FAQItem[] = [
   {
     question: "Is it free to post a job?",
     answer:
-      "Yes. Describing your job and receiving quotes is free. You only deal with the tradie you choose to hire, and you pay them directly for the work.",
+      "Yes. Describing your job and receiving quotes is free. You only deal with the trades business you choose to hire, and you pay them directly for the work.",
   },
   {
     question: "How quickly will I hear back?",
@@ -25,6 +25,6 @@ export const productFaqs: FAQItem[] = [
   {
     question: "What does the AI actually do?",
     answer:
-      "It asks the questions a tradie would ask, turns your answers and photos into a clear job brief, and sends it to suitable licensed businesses. It doesn't diagnose problems or give trade advice — that's for the tradie who quotes.",
+      "It asks the questions a tradesperson would ask, turns your answers and photos into a clear job brief, and sends it to suitable licensed businesses. It doesn't diagnose problems or give trade advice — that's for the tradesperson who quotes.",
   },
 ];

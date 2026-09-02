@@ -14,7 +14,7 @@ export function SubmissionConfirmation({
   reference: string;
   onRestart: () => void;
 }) {
-  const tradesLabel = brief.tradeName ? `${brief.tradeName}s` : "tradies";
+  const tradesLabel = brief.tradeName ? `${brief.tradeName}s` : "trades";
   const suburbShort = brief.suburb?.split(",")[0]?.trim();
   const loadingStages = [
     "Reviewing your job details",

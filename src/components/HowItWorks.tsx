@@ -4,10 +4,10 @@ import { ArrowRight } from "lucide-react";
 /**
  * The three-step explainer, shown on the home page, /how-it-works and every
  * landing page. `tradesLabel` makes step two specific to the page — an
- * electrician page promises electricians, not generic "tradies".
+ * electrician page promises electricians, not generic "trades".
  */
 export function HowItWorks({
-  tradesLabel = "tradies",
+  tradesLabel = "trades",
   heading = "How Serviceman.ai works",
   withCta = true,
 }: {

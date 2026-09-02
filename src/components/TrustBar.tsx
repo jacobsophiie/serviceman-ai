@@ -11,7 +11,7 @@ const shortLabels: Record<string, string> = {
 };
 
 export function TrustBar({
-  tradesLabel = "tradies",
+  tradesLabel = "trades",
   tone = "light",
 }: {
   tradesLabel?: string;

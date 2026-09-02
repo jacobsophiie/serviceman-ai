@@ -4,7 +4,7 @@ import { ConversationWorkspace } from "@/components/chat/ConversationWorkspace";
 export const metadata: Metadata = {
   title: "Chat with the AI job assistant",
   description:
-    "Describe the job in your own words. Our AI agent asks the right questions and prepares a clear job request for suitable local tradies.",
+    "Describe the job in your own words. Our AI agent asks the right questions and prepares a clear job request for suitable local trades.",
   robots: { index: false },
 };
 

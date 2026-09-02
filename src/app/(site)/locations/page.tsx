@@ -20,7 +20,7 @@ export default function LocationsIndexPage() {
       <LandingHero
         image={heroImage}
         eyebrow="Australia wide"
-        title="An AI agent that finds tradies, wherever you are"
+        title="An AI agent that finds trades, wherever you are"
         copy="Tell us the job and where it is. Your AI agent finds licensed trades businesses servicing your suburb and brings their quotes back to you."
       />
 
@@ -55,7 +55,7 @@ export default function LocationsIndexPage() {
                       {location.state} · {location.postcodeRange}
                     </span>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue">
-                      Find tradies {inPlace(location)}
+                      Find trades {inPlace(location)}
                       <ArrowRight
                         className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                         aria-hidden

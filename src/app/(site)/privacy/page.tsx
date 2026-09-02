@@ -25,7 +25,7 @@ const sections = [
   },
   {
     heading: "Your choices",
-    body: "You can review and edit every part of your job request before it is submitted, choose how tradies contact you, and ask us to delete your information at any time by contacting hello@serviceman.ai.",
+    body: "You can review and edit every part of your job request before it is submitted, choose how trades contact you, and ask us to delete your information at any time by contacting hello@serviceman.ai.",
   },
   {
     heading: "What happens to your job request",

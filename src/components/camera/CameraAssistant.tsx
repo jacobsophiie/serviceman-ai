@@ -628,7 +628,7 @@ export function CameraAssistant({
               </p>
               <p className="mt-1 text-xs leading-relaxed text-muted">
                 Next we&rsquo;ll confirm a few details like timing, location
-                and how tradies can reach you.
+                and how trades can reach you.
               </p>
               <button
                 type="button"

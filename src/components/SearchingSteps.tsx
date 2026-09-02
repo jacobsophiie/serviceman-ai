@@ -10,7 +10,7 @@ import { Check, Loader2 } from "lucide-react";
 export function SearchingSteps({
   steps,
   onFinished,
-  heading = "Finding your tradies…",
+  heading = "Finding your trades…",
 }: {
   steps: string[];
   onFinished: () => void;

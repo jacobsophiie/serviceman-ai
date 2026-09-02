@@ -3,7 +3,7 @@ import Link from "next/link";
 /** Closing call to action — a flat navy band, one button. */
 export function FinalCTA({
   heading = "Ready to get it sorted?",
-  copy = "Tell us what you need and we'll get you quotes from licensed local tradies — free, with no obligation to hire.",
+  copy = "Tell us what you need and we'll get you quotes from licensed local trades — free, with no obligation to hire.",
   chatPrompt,
 }: {
   heading?: string;

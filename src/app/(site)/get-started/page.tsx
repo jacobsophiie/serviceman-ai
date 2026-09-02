@@ -11,7 +11,7 @@ import { FAQAccordion } from "@/components/FAQAccordion";
 export const metadata: Metadata = {
   title: "Get free quotes",
   description:
-    "Tell us what needs doing and we'll get licensed local tradies to quote. Free, and no obligation to hire.",
+    "Tell us what needs doing and we'll get licensed local trades to quote. Free, and no obligation to hire.",
 };
 
 /** One-tap starting points: the three most common jobs for the busiest trades. */

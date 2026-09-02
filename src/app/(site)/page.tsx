@@ -22,10 +22,10 @@ import { productFaqs } from "@/lib/data/faqs";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "serviceman.ai — Your AI agent finds the best local tradies",
+    absolute: "serviceman.ai — Your AI agent finds the best local trades",
   },
   description:
-    "Tell us the job and your AI agent gets to work — asking the right questions, writing the brief and finding licensed local tradies to quote. Free, no obligation.",
+    "Tell us the job and your AI agent gets to work — asking the right questions, writing the brief and finding licensed local trades to quote. Free, no obligation.",
 };
 
 const trustPoints = [
@@ -52,7 +52,7 @@ const trustPoints = [
 ];
 
 const briefChecks = [
-  "Asks the questions a tradie would ask for your kind of job",
+  "Asks the questions a tradesperson would ask for your kind of job",
   "Adds your photos so businesses can quote accurately",
   "Sends the brief only to licensed businesses servicing your suburb",
   "Quotes come to you — you choose who to go with",
@@ -81,7 +81,7 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <h1 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
               Tell us the job.
-              <br className="hidden sm:block" /> Our AI agent finds the best local tradies.
+              <br className="hidden sm:block" /> Our AI agent finds the best local trades.
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/85">
               Describe what needs doing and your AI agent gets to work: it asks
@@ -155,7 +155,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
               Instead of ringing around and explaining the job five times,
-              explain it once. Your AI agent asks the questions a tradie would
+              explain it once. Your AI agent asks the questions a tradesperson would
               ask, adds your photos, writes the brief — then goes and finds
               licensed businesses to quote on it.
             </p>
@@ -204,7 +204,7 @@ export default function HomePage() {
           </div>
           <div>
             <h2 className="font-display text-xl font-bold text-navy">
-              Tradies near you
+              Trades near you
             </h2>
             <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-[15px]">
               {majorLocations.map((location) => (
@@ -213,7 +213,7 @@ export default function HomePage() {
                     href={`/locations/${location.slug}`}
                     className="text-ink hover:text-blue hover:underline"
                   >
-                    Tradies {inPlace(location)}
+                    Trades {inPlace(location)}
                   </Link>
                 </li>
               ))}
@@ -234,12 +234,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* For tradies */}
+      {/* For trades */}
       <section className="bg-navy">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-14 sm:px-6 md:flex-row md:items-center">
           <div>
             <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">
-              Are you a tradie?
+              Are you a trades business?
             </h2>
             <p className="mt-2 max-w-xl text-base leading-relaxed text-white/80">
               Get job requests that arrive with the details already collected —

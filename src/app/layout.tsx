@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | serviceman.ai",
   },
   description:
-    "Open your camera or chat with our AI agent. We'll ask the right questions, create a clear job request and send it to suitable local tradies.",
+    "Open your camera or chat with our AI agent. We'll ask the right questions, create a clear job request and send it to suitable local trades.",
 };
 
 export default function RootLayout({

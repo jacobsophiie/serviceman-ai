@@ -20,7 +20,7 @@ export interface Trade {
   suggestedQuestions: string[];
   /** Trade-specific safety guidance */
   safety: string;
-  /** Photos that help a tradie understand the job */
+  /** Photos that help a trades business understand the job */
   helpfulPhotos: string[];
   /** Trade-specific FAQ content */
   faqs: TradeFAQ[];

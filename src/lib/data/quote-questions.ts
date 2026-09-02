@@ -527,7 +527,7 @@ export const sharedQuestions: QuoteQuestion[] = [
   {
     id: "shared-detail",
     question: "Anything else we should know?",
-    hint: "A little extra detail helps tradies quote accurately.",
+    hint: "A little extra detail helps trades quote accurately.",
     type: "text",
     optional: true,
     placeholder:

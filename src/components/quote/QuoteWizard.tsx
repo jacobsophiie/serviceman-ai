@@ -167,7 +167,7 @@ export function QuoteWizard({
       <SearchingSteps
         steps={[
           "Reviewing your job details",
-          `Locating ${tradeName ?? "tradie"}s near ${locationDisplay}`,
+          `Locating ${tradeName ? `${tradeName}s` : "trades"} near ${locationDisplay}`,
           "Checking availability",
           "Sending your job request",
         ]}
@@ -193,7 +193,7 @@ export function QuoteWizard({
         <p className="mt-3 text-base leading-relaxed text-muted">
           Your quote has been submitted with local{" "}
           <strong className="font-semibold text-ink">
-            {tradeName ? `${tradeName}s` : "tradies"}
+            {tradeName ? `${tradeName}s` : "trades"}
           </strong>{" "}
           around{" "}
           <strong className="font-semibold text-ink">{locationDisplay}</strong>.
@@ -363,7 +363,7 @@ export function QuoteWizard({
                 Where should the quotes go?
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                Tradies will use these details to send you their quotes.
+                Trades will use these details to send you their quotes.
               </p>
               <div className="mt-5 grid gap-4">
                 <div>
@@ -408,7 +408,7 @@ export function QuoteWizard({
                 type="submit"
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep sm:w-auto"
               >
-                Get quotes from tradies
+                Get quotes from trades
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </button>
               <p className="mt-3 text-xs leading-relaxed text-muted">

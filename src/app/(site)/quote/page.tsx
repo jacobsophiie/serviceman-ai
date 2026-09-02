@@ -4,7 +4,7 @@ import { QuoteWizard } from "@/components/quote/QuoteWizard";
 export const metadata: Metadata = {
   title: "Get quotes",
   description:
-    "Answer a few quick questions about the job and we'll prepare your request for suitable local tradies.",
+    "Answer a few quick questions about the job and we'll prepare your request for suitable local trades.",
 };
 
 export default async function QuotePage({

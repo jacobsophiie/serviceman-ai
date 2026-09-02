@@ -143,7 +143,7 @@ export function JobReview({
       className="rise-in rounded-lg border border-line bg-white p-5 sm:p-6"
     >
       <h2 className="font-display text-xl font-bold text-navy">
-        Here&rsquo;s the job we&rsquo;ll send to local tradies
+        Here&rsquo;s the job we&rsquo;ll send to local trades
       </h2>
 
       <div className="mt-4 rounded-lg bg-cloud p-4">
@@ -253,7 +253,7 @@ export function JobReview({
           className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-blue px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blue-deep"
         >
           <Send className="h-4 w-4" aria-hidden />
-          Send my job to local tradies
+          Send my job to local trades
         </button>
         <button
           type="button"

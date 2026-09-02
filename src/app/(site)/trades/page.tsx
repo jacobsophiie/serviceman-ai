@@ -6,7 +6,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Plumbing, electrical, painting, gardening and more. Describe the job to our AI agent and we'll prepare your request for suitable local tradies.",
+    "Plumbing, electrical, painting, gardening and more. Describe the job to our AI agent and we'll prepare your request for suitable local trades.",
 };
 
 export default function TradesIndexPage() {

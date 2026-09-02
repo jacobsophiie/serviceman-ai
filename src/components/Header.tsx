@@ -37,12 +37,6 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-5 md:flex">
-          <Link
-            href="/for-trades-businesses"
-            className="whitespace-nowrap text-sm font-medium text-muted transition-colors hover:text-ink"
-          >
-            For trades businesses
-          </Link>
           <AccountMenu />
           <Link
             href="/get-started"
@@ -91,15 +85,6 @@ export function Header() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="/for-trades-businesses"
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-3 text-base font-medium text-muted hover:bg-cloud"
-              >
-                For trades businesses
-              </Link>
-            </li>
             <li>
               <Link
                 href="/account"
